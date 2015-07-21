@@ -1,0 +1,16 @@
+[
+{
+  "modid": "projectxy",
+  "name": "Projext XY",
+  "description": "",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["Projext XY"],
+  "credits": "",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
