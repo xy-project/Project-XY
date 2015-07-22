@@ -1,10 +1,9 @@
 package com.projextxy.core.client.render.item
 
 import codechicken.lib.colour.ColourRGBA
-import codechicken.lib.render.CCRenderState
 import codechicken.lib.vec.Vector3
 import com.projextxy.core.ProjectXYCoreProxy
-import com.projextxy.core.blocks.glow.{ColorMultiplier, BlockXyCustom}
+import com.projextxy.core.blocks.glow.{BlockXyCustom, ColorMultiplier}
 import com.projextxy.lib.cofh.render.RenderHelper
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.RenderBlocks

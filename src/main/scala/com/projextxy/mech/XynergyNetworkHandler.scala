@@ -1,14 +1,12 @@
 package com.projextxy.mech
 
 import codechicken.lib.vec.BlockCoord
-import com.projextxy.mech.fmp.{NodePart, ProviderPart, ReceiverPart, TXyRedstonePart}
+import com.projextxy.mech.fmp.{ReceiverPart, TXyRedstonePart}
 import com.projextxy.util.MathHelper
 import net.minecraft.world.World
 
-
 import scala.collection.mutable
 import scala.collection.mutable.ArrayBuffer
-import scala.util.control.Breaks
 
 object XynergyNetworkHandler {
   val receivers = mutable.WeakHashMap[World, ArrayBuffer[PartSignature]]()
@@ -73,8 +71,6 @@ object XynergyNetworkHandler {
     tilesInRange
   }
 
-  def getReceiversInWorld(world: World): Option[ArrayBuffer[PartSignature]] = receivers.get(world)
-
   def getClosestReceiversInRange(part: TXyRedstonePart, maxDistance: Float, limit: Int): ArrayBuffer[TXyRedstonePart] = {
     val tilesInRange = new ArrayBuffer[TXyRedstonePart]()
     val calc = mutable.HashMap[TXyRedstonePart, Float]()
@@ -103,6 +99,8 @@ object XynergyNetworkHandler {
     }
     tilesInRange
   }
+
+  def getReceiversInWorld(world: World): Option[ArrayBuffer[PartSignature]] = receivers.get(world)
 
   def removeReceiver(part: TXyRedstonePart): Unit = {
     val world = part.world

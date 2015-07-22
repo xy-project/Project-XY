@@ -2,9 +2,7 @@ package com.projextxy.core.tile;
 
 import codechicken.lib.packet.PacketCustom;
 import com.projextxy.core.CoreBlocks$;
-import com.projextxy.core.ProjectXYCore;
 import com.projextxy.core.ProjectXYCore$;
-import com.projextxy.core.tile.TileAbstractMachine;
 import com.projextxy.util.LogHelper;
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

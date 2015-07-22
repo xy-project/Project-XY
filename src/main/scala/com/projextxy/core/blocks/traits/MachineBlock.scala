@@ -3,7 +3,6 @@ package com.projextxy.core.blocks.traits
 import java.util
 
 import com.google.common.collect.Lists
-import com.projextxy.core.tile.TileAbstractMachine
 import com.projextxy.core.tile.traits.TMachineTile
 import net.minecraft.block.{Block, ITileEntityProvider}
 import net.minecraft.entity.EntityLivingBase

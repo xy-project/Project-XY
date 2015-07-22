@@ -2,11 +2,11 @@ package com.projextxy.mech.fmp
 
 import codechicken.lib.render.CCRenderState
 import codechicken.lib.render.uv.IconTransformation
-import codechicken.lib.vec.{Vector3, BlockCoord, Cuboid6}
+import codechicken.lib.vec.{Cuboid6, Vector3}
 import codechicken.multipart.TCuboidPart
-import com.projextxy.core.{ProjectXYCoreProxy, ProjectXYCore}
 import com.projextxy.core.client.render.fx.FXBeam
 import com.projextxy.core.reference.MCColors
+import com.projextxy.core.{ProjectXYCore, ProjectXYCoreProxy}
 import com.projextxy.mech.XynergyNetworkHandler
 import com.projextxy.mech.client.TileRecieverRenderer
 import cpw.mods.fml.client.FMLClientHandler

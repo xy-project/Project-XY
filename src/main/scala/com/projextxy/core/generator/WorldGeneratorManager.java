@@ -1,6 +1,5 @@
 package com.projextxy.core.generator;
 
-import com.projextxy.core.CoreBlocks;
 import com.projextxy.core.CoreBlocks$;
 import cpw.mods.fml.common.IWorldGenerator;
 import net.minecraft.init.Blocks;

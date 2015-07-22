@@ -3,10 +3,10 @@ package com.projextxy.core.client.gui;
 import codechicken.lib.colour.ColourRGBA;
 import com.projextxy.core.ProjectXYCore$;
 import com.projextxy.core.inventory.ContainerRGB;
-import com.projextxy.lib.cofh.gui.GuiColor;
-import com.projextxy.lib.cofh.gui.element.listbox.SliderHorizontal;
 import com.projextxy.core.reference.MCColors;
 import com.projextxy.core.tile.TileColorizer;
+import com.projextxy.lib.cofh.gui.GuiColor;
+import com.projextxy.lib.cofh.gui.element.listbox.SliderHorizontal;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.util.ResourceLocation;
 

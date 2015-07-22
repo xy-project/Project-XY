@@ -1,10 +1,10 @@
 package com.projextxy.core.blocks.glow
 
-import com.projextxy.core.blocks.traits.MachineBlock
 import com.projextxy.core.blocks.BlockXy
-import com.projextxy.core.tile.TileColorizer
-import com.projextxy.core.{ProjectXYCore, CoreBlocks}
+import com.projextxy.core.blocks.traits.MachineBlock
 import com.projextxy.core.handler.GuiHandler
+import com.projextxy.core.tile.TileColorizer
+import com.projextxy.core.{CoreBlocks, ProjectXYCore}
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.EnumCreatureType

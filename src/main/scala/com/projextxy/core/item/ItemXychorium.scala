@@ -1,7 +1,7 @@
 package com.projextxy.core.item
 
 import com.projextxy.core.ProjectXYCore
-import com.projextxy.core.reference.{MCColors, ModColors, EnumStained}
+import com.projextxy.core.reference.{MCColors, ModColors}
 
 class ItemXychorium extends ItemXy with TColoredItem {
   setUnlocalizedName("itemxychorium")

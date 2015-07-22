@@ -1,10 +1,8 @@
 package com.projextxy.core.client
 
-import codechicken.lib.colour.ColourRGBA
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.gameevent.TickEvent
 import cpw.mods.fml.common.gameevent.TickEvent.Phase
-import sun.plugin2.util.ColorUtil.ColorRGB
 
 object RenderTickHandler {
   var renderTime = 0

@@ -17,9 +17,9 @@ import org.lwjgl.opengl.GL11
 import scala.collection.mutable.ArrayBuffer
 
 class ProviderPart extends TCuboidPart with TXyRedstonePart with IRedstonePart {
-  var tickCount = 0
   val parents = new ArrayBuffer[TXyRedstonePart]
   val children = new ArrayBuffer[TXyRedstonePart]()
+  var tickCount = 0
 
   @SideOnly(Side.CLIENT)
   override def renderStatic(pos: Vector3, pass: Int): Boolean = super.renderStatic(pos, pass)
@@ -78,7 +78,7 @@ class ProviderPart extends TCuboidPart with TXyRedstonePart with IRedstonePart {
     }
   }
 
-  override def scheduledTick(){
+  override def scheduledTick() {
     println("scheduledTick")
   }
 

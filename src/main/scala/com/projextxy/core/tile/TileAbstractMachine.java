@@ -2,7 +2,6 @@ package com.projextxy.core.tile;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 
 public abstract class TileAbstractMachine extends TileEntity {

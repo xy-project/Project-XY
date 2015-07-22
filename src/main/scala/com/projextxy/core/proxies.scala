@@ -6,7 +6,6 @@ import com.projextxy.core.client.render.block.{RenderCustomGlow, RenderSimpleGlo
 import com.projextxy.core.client.render.item.{RenderXyCustomItemBlock, XychoriumlItemRenderer}
 import com.projextxy.core.client.{AnimationFX, RenderTickHandler}
 import com.projextxy.core.generator.WorldGeneratorManager
-import com.projextxy.core.item.CoreItems
 import com.projextxy.core.tile.{TileColorizer, TileXyCustomColor}
 import cpw.mods.fml.client.registry.RenderingRegistry
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
@@ -34,13 +33,13 @@ class CommonProxy {
 }
 
 class ClientProxy extends CommonProxy {
+  var animationFx: AnimationFX = null
+  var rainbowColors: Array[ColourRGBA] = Array.fill[ColourRGBA](8)(null)
+
   @SideOnly(Side.CLIENT)
   override def preInit(event: FMLPreInitializationEvent): Unit = {
     super.preInit(event)
   }
-
-  var animationFx: AnimationFX = null
-  var rainbowColors: Array[ColourRGBA] = Array.fill[ColourRGBA](8)(null)
 
   @SideOnly(Side.CLIENT)
   override def init(event: FMLInitializationEvent): Unit = {

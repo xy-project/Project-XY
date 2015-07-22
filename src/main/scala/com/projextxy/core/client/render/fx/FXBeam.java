@@ -19,7 +19,13 @@ public class FXBeam extends EntityFX {
     private double ptY = 0.0D;
     private double ptZ = 0.0D;
     private boolean shown = false;
-
+    private float length = 0.0F;
+    private float rotYaw = 0.0F;
+    private float rotPitch = 0.0F;
+    private float prevYaw = 0.0F;
+    private float prevPitch = 0.0F;
+    private float opacity = 0.3F;
+    private float prevSize = 0.0F;
     public FXBeam(World par1World, double px, double py, double pz, double tx, double ty, double tz, float red, float green, float blue, int age) {
         super(par1World, px, py, pz, 0.0D, 0.0D, 0.0D);
 
@@ -89,21 +95,12 @@ public class FXBeam extends EntityFX {
         this.particleBlue = b;
     }
 
-    private float length = 0.0F;
-    private float rotYaw = 0.0F;
-    private float rotPitch = 0.0F;
-    private float prevYaw = 0.0F;
-    private float prevPitch = 0.0F;
-    private float opacity = 0.3F;
-
     public void setPulse(boolean pulse, float r, float g, float b) {
         setRGB(r, g, b);
         if (pulse) {
             this.opacity = 0.8F;
         }
     }
-
-    private float prevSize = 0.0F;
 
     @Override
     public void renderParticle(Tessellator tessellator, float f, float f1, float f2, float f3, float f4, float f5) {

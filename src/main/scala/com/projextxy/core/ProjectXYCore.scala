@@ -1,8 +1,6 @@
 package com.projextxy.core
 
 import com.projextxy.core.handler.GuiHandler
-import com.projextxy.core.item.CoreItems
-import com.projextxy.core.reference.EnumStained
 import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}

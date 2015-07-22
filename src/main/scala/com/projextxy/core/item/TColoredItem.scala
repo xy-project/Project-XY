@@ -2,7 +2,7 @@ package com.projextxy.core.item
 
 import java.util
 
-import com.projextxy.core.reference.{MCColors, EnumStained}
+import com.projextxy.core.reference.MCColors
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.{Item, ItemStack}
 

@@ -1,6 +1,6 @@
-package com.projextxy.core.item
+package com.projextxy.core
 
-import com.projextxy.core.ProjectXYCore
+import com.projextxy.core.item.{ItemXy, ItemXychoridite, ItemXychorium}
 import com.projextxy.util.LogHelper
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.item.Item

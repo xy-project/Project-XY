@@ -2,9 +2,9 @@ package com.projextxy.core.blocks.glow
 
 import java.util
 
+import com.projextxy.core.CoreItems
 import com.projextxy.core.client.render.block.RenderSimpleGlow
-import com.projextxy.core.item.CoreItems
-import com.projextxy.core.reference.{ModColors, EnumStained}
+import com.projextxy.core.reference.ModColors
 import net.minecraft.block.material.Material
 import net.minecraft.item.ItemStack
 import net.minecraft.util.MathHelper
