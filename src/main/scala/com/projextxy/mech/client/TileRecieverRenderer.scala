@@ -1,7 +1,5 @@
 package com.projextxy.mech.client
 
-import codechicken.lib.render.CCModel
-import codechicken.lib.vec._
 import com.projextxy.core.ProjectXYCore
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer
 import net.minecraft.tileentity.TileEntity

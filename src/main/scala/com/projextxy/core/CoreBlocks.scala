@@ -4,7 +4,6 @@ import com.projextxy.core.blocks.glow._
 import com.projextxy.core.blocks.item.{ItemBLockColorContainer, ItemBlockColor}
 import com.projextxy.core.client.render.block.RenderSimpleGlow
 import com.projextxy.core.reference.ModColors
-import com.projextxy.mech.block.BlockXyBasicMachine
 import com.projextxy.util.LogHelper
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.block.Block

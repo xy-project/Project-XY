@@ -1,7 +1,5 @@
 package com.projextxy.mech.fmp
 
-import codechicken.multipart.TMultiPart
-
 import scala.collection.mutable.ArrayBuffer
 
 trait TXyRedstonePart extends TMultiPart {

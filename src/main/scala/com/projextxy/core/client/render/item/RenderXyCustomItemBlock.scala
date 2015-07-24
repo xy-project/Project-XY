@@ -1,7 +1,5 @@
 package com.projextxy.core.client.render.item
 
-import codechicken.lib.colour.ColourRGBA
-import codechicken.lib.vec.Vector3
 import com.projextxy.core.ProjectXYCoreProxy
 import com.projextxy.core.blocks.glow.{BlockXyCustom, ColorMultiplier}
 import com.projextxy.lib.cofh.render.RenderHelper

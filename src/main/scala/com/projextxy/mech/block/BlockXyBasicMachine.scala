@@ -25,20 +25,15 @@ class BlockXyBasicMachine extends BlockXyGlow(Material.rock, RenderSimpleGlow.mo
 
   override def registerBlockIcons(iconRegister: IIconRegister) {
     def registerMachineIcon(name: String): IIcon = iconRegister.registerIcon(s"${ProjectXYCore.MOD_ID}:overlay/$name")
-    icons(0) = registerMachineIcon("blockXyWater")
-    icons(1) = registerMachineIcon("blockXyVoid")
-    icons(2) = registerMachineIcon("blockXyIce")
-    icons(3) = registerMachineIcon("blockXySoil")
+    icons(XY_WATER_META) = registerMachineIcon("blockXyWater")
+    icons(XY_VOID_META) = registerMachineIcon("blockXyVoid")
+    icons(XY_ICE_META) = registerMachineIcon("blockXyIce")
+    icons(XY_SOIL_META) = registerMachineIcon("blockXySoil")
     upIcon = registerMachineIcon("basicMachineTop")
   }
 
 
   override def onNeighborBlockChange(world: World, x: Int, y: Int, z: Int, block: Block) {
-    searchForAll(world, x, y, z)
-  }
-
-
-  override def onBlockAdded(world: World, x: Int, y: Int, z: Int): Unit = {
     searchForAll(world, x, y, z)
   }
 
@@ -84,6 +79,9 @@ class BlockXyBasicMachine extends BlockXyGlow(Material.rock, RenderSimpleGlow.mo
     }
   }
 
+  override def onBlockAdded(world: World, x: Int, y: Int, z: Int): Unit = {
+    searchForAll(world, x, y, z)
+  }
 
   override def updateTick(world: World, x: Int, y: Int, z: Int, rand: Random): Unit = {
     if (world.getBlockMetadata(x, y, z) == XY_SOIL_META)
@@ -97,9 +95,9 @@ class BlockXyBasicMachine extends BlockXyGlow(Material.rock, RenderSimpleGlow.mo
       }
   }
 
-  override def canSustainPlant(world: IBlockAccess, x: Int, y: Int, z: Int, direction: ForgeDirection, plantable: IPlantable): Boolean = world.getBlockMetadata(x, y, z) == 3
+  override def canSustainPlant(world: IBlockAccess, x: Int, y: Int, z: Int, direction: ForgeDirection, plantable: IPlantable): Boolean = world.getBlockMetadata(x, y, z) == XY_SOIL_META
 
-  override def isFertile(world: World, x: Int, y: Int, z: Int): Boolean = world.getBlockMetadata(x, y, z) == 3
+  override def isFertile(world: World, x: Int, y: Int, z: Int): Boolean = world.getBlockMetadata(x, y, z) == XY_SOIL_META
 
   override def getIcon(side: Int, meta: Int): IIcon = if (side == ForgeDirection.UP.ordinal()) upIcon else icons(meta)
 }

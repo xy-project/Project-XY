@@ -1,7 +1,5 @@
 package com.projextxy.core
 
-import codechicken.lib.colour.ColourRGBA
-import codechicken.lib.packet.PacketCustom
 import com.projextxy.core.client.render.block.{RenderCustomGlow, RenderSimpleGlow}
 import com.projextxy.core.client.render.item.{RenderXyCustomItemBlock, XychoriumlItemRenderer}
 import com.projextxy.core.client.{AnimationFX, RenderTickHandler}

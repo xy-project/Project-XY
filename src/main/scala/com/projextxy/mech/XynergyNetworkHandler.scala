@@ -1,6 +1,5 @@
 package com.projextxy.mech
 
-import codechicken.lib.vec.BlockCoord
 import com.projextxy.mech.fmp.{ReceiverPart, TXyRedstonePart}
 import com.projextxy.util.MathHelper
 import net.minecraft.world.World

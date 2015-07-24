@@ -10,9 +10,6 @@ import net.minecraft.item.ItemStack
 import net.minecraft.util.MathHelper
 import net.minecraft.world.World
 
-/**
- * Created by Adam on 7/12/2015.
- */
 class BlockXyOre extends BlockXyGlow(Material.rock, RenderSimpleGlow.modelId) {
   val min_drop = 4
   val max_drop = 6
