@@ -4,7 +4,7 @@ import com.projextxy.util.LogHelper
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.item.Item
 
-object EnergyItems {
+object MechItems {
   var itemXynergyPart: ItemXynergy = _
 
   def init() {

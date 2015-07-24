@@ -1,18 +1,26 @@
 package com.projextxy.mech
 
+import com.projextxy.core.blocks.glow.BlockXyGlow
+import com.projextxy.core.blocks.item.ItemBlockColor
+import com.projextxy.mech.block.BlockXyBasicMachine
 import com.projextxy.util.LogHelper
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.block.Block
 import net.minecraft.item.ItemBlock
 
-object EnergyBlocks {
+object MechBlocks {
 
+  var blockXyBasicMachine: BlockXyGlow = null
 
-  def init() {
+  def init(): Unit = {
+    blockXyBasicMachine = new BlockXyBasicMachine
+
+    registerBlock(blockXyBasicMachine, classOf[ItemBlockColor])
   }
 
   def registerBlock(block: Block): Block = {
     return registerBlock(block, classOf[ItemBlock])
+
   }
 
   def registerBlock(block: Block, itemBlock: Class[_ <: ItemBlock]) = {

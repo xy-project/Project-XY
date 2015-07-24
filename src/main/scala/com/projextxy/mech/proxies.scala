@@ -5,8 +5,8 @@ import cpw.mods.fml.relauncher.{Side, SideOnly}
 
 class CommonProxy {
   def preInit(event: FMLPreInitializationEvent) {
-    EnergyBlocks.init()
-    EnergyItems.init()
+    MechBlocks.init()
+    MechItems.init()
   }
 
   def init(event: FMLInitializationEvent) {
@@ -33,4 +33,4 @@ class ClientProxy extends CommonProxy {
   }
 }
 
-object ProjectXYEnergyProxy extends ClientProxy
+object ProjectXYMechProxy extends ClientProxy

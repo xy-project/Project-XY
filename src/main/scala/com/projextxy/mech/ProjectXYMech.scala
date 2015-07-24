@@ -6,20 +6,20 @@ import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
 
 @Mod(modid = "ProjectXyMech", name = "Project XY - Mech", modLanguage = "scala")
-object ProjectXYEnergy {
+object ProjectXYMech {
   val MOD_ID = "ProjectXyMech"
 
   @EventHandler def init(event: FMLInitializationEvent) {
     FMP.init()
-    ProjectXYEnergyProxy.init(event)
+    ProjectXYMechProxy.init(event)
   }
 
   @EventHandler def preInit(event: FMLPreInitializationEvent) {
-    ProjectXYEnergyProxy.preInit(event)
+    ProjectXYMechProxy.preInit(event)
   }
 
 
   @EventHandler def postInit(event: FMLPostInitializationEvent) {
-    ProjectXYEnergyProxy.postInit(event)
+    ProjectXYMechProxy.postInit(event)
   }
 }

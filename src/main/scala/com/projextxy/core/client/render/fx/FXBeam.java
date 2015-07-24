@@ -26,6 +26,7 @@ public class FXBeam extends EntityFX {
     private float prevPitch = 0.0F;
     private float opacity = 0.3F;
     private float prevSize = 0.0F;
+
     public FXBeam(World par1World, double px, double py, double pz, double tx, double ty, double tz, float red, float green, float blue, int age) {
         super(par1World, px, py, pz, 0.0D, 0.0D, 0.0D);
 

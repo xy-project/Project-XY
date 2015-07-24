@@ -4,6 +4,7 @@ import com.projextxy.core.blocks.glow._
 import com.projextxy.core.blocks.item.{ItemBLockColorContainer, ItemBlockColor}
 import com.projextxy.core.client.render.block.RenderSimpleGlow
 import com.projextxy.core.reference.ModColors
+import com.projextxy.mech.block.BlockXyBasicMachine
 import com.projextxy.util.LogHelper
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.block.Block
@@ -18,7 +19,6 @@ object CoreBlocks {
   var blockXyColorizer: BlockXyColorizer = null
   var blockXyMachineBlock: BlockXyGlow = null
 
-  var blockXyBasicMachine: BlockXyGlow = null
 
   def init() {
     blockXyOre = new BlockXyOre()
@@ -35,8 +35,6 @@ object CoreBlocks {
     blockXyMachineBlock.setBlockName("blockXyMachineBlock")
     blockXyMachineBlock.colors = ModColors.xyColors
 
-    blockXyBasicMachine = new BlockXyBasicMachine
-
     blockXyCustom = new BlockXyCustom(List(blockXyBrick, blockXyStorage, blockXyMachineBlock))
     blockXyColorizer = new BlockXyColorizer()
 
@@ -44,7 +42,6 @@ object CoreBlocks {
     registerBlock(blockXyStorage, classOf[ItemBlockColor])
     registerBlock(blockXyBrick, classOf[ItemBlockColor])
     registerBlock(blockXyMachineBlock, classOf[ItemBlockColor])
-    registerBlock(blockXyBasicMachine, classOf[ItemBlockColor])
     registerBlock(blockXyCustom, classOf[ItemBLockColorContainer])
     registerBlock(blockXyColorizer, classOf[ItemBLockColorContainer])
   }
