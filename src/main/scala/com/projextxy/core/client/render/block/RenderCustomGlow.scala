@@ -28,9 +28,11 @@ class RenderCustomGlow extends RenderBlock with ISimpleBlockRenderingHandler {
 
         RenderBlock.renderAllSides(world, x, y, z, block, renderer, BlockXyGlow.baseIcon, false)
         renderer.renderStandardBlock(block, x, y, z)
+
         CoreBlocks.blockXyCustom.sub_blocks(world.getBlockMetadata(x, y, z)) match {
           case connectedBlock: TConnectedTextureBlock =>
             val folder = connectedBlock.connectedFolder
+            tess.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z))
             renderer.renderFaceYNeg(block, x, y, z, CTRegistry.getConnectedBlockTexture(folder, world, x, y, z, 0, block))
             renderer.renderFaceYPos(block, x, y, z, CTRegistry.getConnectedBlockTexture(folder, world, x, y, z, 1, block))
             renderer.renderFaceZNeg(block, x, y, z, CTRegistry.getConnectedBlockTexture(folder, world, x, y, z, 2, block))

@@ -14,6 +14,13 @@ import net.minecraft.item.ItemBlock
 
 object CoreBlocks {
   var blockXyBrick: BlockXyGlow = null
+  var blockXyBrickColored: BlockXyGlow = null
+  var blockXyBrickInverted: BlockXyGlow = null
+  var blockXyBrickInvertedWhite: BlockXyGlow = null
+  var blockXyBrickFancy: BlockXyGlow = null
+  var blockXyBrickFancyInverted: BlockXyGlow = null
+  var blockXyBrickFancyInvertedWhite: BlockXyGlow = null
+
   var blockXyStorage: BlockXyGlow = null
   var blockXyOre: BlockXyOre = null
   var blockXyCustom: BlockXyCustom = null
@@ -25,37 +32,85 @@ object CoreBlocks {
 
   def init() {
     blockXyOre = new BlockXyOre()
-
     blockXyStorage = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId)
     blockXyStorage.setBlockName("blockXyStorage")
     blockXyStorage.colors = ModColors.xyColors
 
+    registerBlock(blockXyOre, classOf[ItemBlockColor])
+    registerBlock(blockXyStorage, classOf[ItemBlockColor])
+
+    initBricks()
+    initMachineBlocks()
+
+    blockXyCustom = new BlockXyCustom(List(
+      blockXyStorage,
+      blockXyBrick,
+      blockXyBrickInverted,
+      blockXyBrickInvertedWhite,
+      blockXyBrickColored,
+      blockXyBrickFancy,
+      blockXyBrickFancyInverted,
+      blockXyBrickFancyInvertedWhite,
+      blockXyMachineBlock,
+      blockXyMachineBlockWhite))
+    blockXyColorizer = new BlockXyColorizer()
+
+    registerBlock(blockXyCustom, classOf[ItemBLockColorContainer])
+    registerBlock(blockXyColorizer, classOf[ItemBLockColorContainer])
+  }
+
+  private def initBricks(): Unit = {
     blockXyBrick = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId) with ColorMultiplier
     blockXyBrick.setBlockName("blockXyBrick")
     blockXyBrick.colors = ModColors.xyColors
 
+    blockXyBrickColored = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId) with ColorMultiplier
+    blockXyBrickColored.setBlockName("blockXyBrickColored")
+    blockXyBrickColored.colors = ModColors.xyColors
+
+    blockXyBrickInverted = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId)
+    blockXyBrickInverted.setBlockName("blockXyBrickInverted")
+    blockXyBrickInverted.colors = ModColors.xyColors
+
+    blockXyBrickInvertedWhite = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId)
+    blockXyBrickInvertedWhite.setBlockName("blockXyBrickInvertedWhite")
+    blockXyBrickInvertedWhite.colors = ModColors.xyColors
+
+    blockXyBrickFancy = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId) with ColorMultiplier
+    blockXyBrickFancy.setBlockName("blockXyBrickFancy")
+    blockXyBrickFancy.colors = ModColors.xyColors
+
+    blockXyBrickFancyInverted = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId)
+    blockXyBrickFancyInverted.setBlockName("blockXyBrickFancyInverted")
+    blockXyBrickFancyInverted.colors = ModColors.xyColors
+
+    blockXyBrickFancyInvertedWhite = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId)
+    blockXyBrickFancyInvertedWhite.setBlockName("blockXyBrickFancyInvertedWhite")
+    blockXyBrickFancyInvertedWhite.colors = ModColors.xyColors
+
+    registerBlock(blockXyBrick, classOf[ItemBlockColor])
+    registerBlock(blockXyBrickColored, classOf[ItemBlockColor])
+    registerBlock(blockXyBrickInverted, classOf[ItemBlockColor])
+    registerBlock(blockXyBrickInvertedWhite, classOf[ItemBlockColor])
+    registerBlock(blockXyBrickFancy, classOf[ItemBlockColor])
+    registerBlock(blockXyBrickFancyInverted, classOf[ItemBlockColor])
+    registerBlock(blockXyBrickFancyInvertedWhite, classOf[ItemBlockColor])
+  }
+
+  private def initMachineBlocks(): Unit = {
     blockXyMachineBlock = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId) with TConnectedTextureBlock {
       val connectedFolder = CTRegistry.CLEAN_CONNECTED_FOLDER
     }
     blockXyMachineBlock.setBlockName("blockXyMachineBlock")
     blockXyMachineBlock.colors = ModColors.xyColors
-
     blockXyMachineBlockWhite = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId) with TConnectedTextureBlock {
       val connectedFolder = CTRegistry.CLEAN_CONNECTED_FOLDER
     }
     blockXyMachineBlockWhite.setBlockName("blockXyMachineBlockWhite")
     blockXyMachineBlockWhite.colors = ModColors.xyColors
 
-    blockXyCustom = new BlockXyCustom(List(blockXyBrick, blockXyStorage, blockXyMachineBlock, blockXyMachineBlockWhite))
-    blockXyColorizer = new BlockXyColorizer()
-
-    registerBlock(blockXyOre, classOf[ItemBlockColor])
-    registerBlock(blockXyStorage, classOf[ItemBlockColor])
-    registerBlock(blockXyBrick, classOf[ItemBlockColor])
     registerBlock(blockXyMachineBlock, classOf[ItemBlockColor])
     registerBlock(blockXyMachineBlockWhite, classOf[ItemBlockColor])
-    registerBlock(blockXyCustom, classOf[ItemBLockColorContainer])
-    registerBlock(blockXyColorizer, classOf[ItemBLockColorContainer])
   }
 
   def registerBlock(block: Block, itemBlock: Class[_ <: ItemBlock]) = {

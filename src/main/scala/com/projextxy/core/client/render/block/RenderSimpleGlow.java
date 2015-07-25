@@ -33,14 +33,6 @@ public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderi
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
         BlockXyGlow blockXyGlow = (BlockXyGlow) block;
-
-        CCRenderState.reset();
-        CCRenderState.useNormals = true;
-        CCRenderState.startDrawing();
-        CCRenderState.setBrightness(blockXyGlow.getBrightness(metadata));
-        baseModel.setColour(new ColourRGBA(blockXyGlow.getColor(metadata) << 8 | 0xFF).rgba()).render(new IconTransformation(BlockXyGlow$.MODULE$.baseIcon()));
-        CCRenderState.draw();
-
         if (block instanceof ColorMultiplier) {
             new ColourRGBA(blockXyGlow.getColor(metadata) << 8 | 0xFF).glColour();
         }
@@ -49,6 +41,13 @@ public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderi
             final String folder = ((TConnectedTextureBlock) block).connectedFolder();
             renderStandardInvBlockWithTexture(renderer, block, CTRegistry$.MODULE$.getMainFaceIcon(folder));
         }
+
+        CCRenderState.reset();
+        CCRenderState.useNormals = true;
+        CCRenderState.startDrawing();
+        CCRenderState.setBrightness(blockXyGlow.getBrightness(metadata));
+        baseModel.setColour(new ColourRGBA(blockXyGlow.getColor(metadata) << 8 | 0xFF).rgba()).render(new IconTransformation(BlockXyGlow$.MODULE$.baseIcon()));
+        CCRenderState.draw();
     }
 
     @Override
@@ -65,6 +64,8 @@ public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderi
 
         if (block instanceof TConnectedTextureBlock) {
             final String folder = ((TConnectedTextureBlock) block).connectedFolder();
+            renderer.setRenderBoundsFromBlock(block);
+            tess.setBrightness(block.getMixedBrightnessForBlock(world, x, y, z));
             renderer.renderFaceYNeg(block, x, y, z, CTRegistry$.MODULE$.getConnectedBlockTexture(folder, world, x, y, z, 0, block));
             renderer.renderFaceYPos(block, x, y, z, CTRegistry$.MODULE$.getConnectedBlockTexture(folder, world, x, y, z, 1, block));
             renderer.renderFaceZNeg(block, x, y, z, CTRegistry$.MODULE$.getConnectedBlockTexture(folder, world, x, y, z, 2, block));
