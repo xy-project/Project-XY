@@ -1,5 +1,7 @@
 package com.projextxy.core
 
+import codechicken.lib.packet.PacketCustom
+import codechicken.lib.vec.BlockCoord
 import com.projextxy.core.tile.traits.TCustomPacketHandler
 import net.minecraft.client.Minecraft
 import net.minecraft.client.multiplayer.WorldClient

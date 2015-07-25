@@ -1,7 +1,11 @@
 package com.projextxy.core.client.render.item
 
+import codechicken.lib.colour.ColourRGBA
+import codechicken.lib.vec.Vector3
 import com.projextxy.core.ProjectXYCoreProxy
 import com.projextxy.core.blocks.glow.{BlockXyCustom, ColorMultiplier}
+import com.projextxy.core.blocks.traits.TConnectedTextureBlock
+import com.projextxy.core.client.CTRegistry
 import com.projextxy.lib.cofh.render.RenderHelper
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.RenderBlocks
@@ -56,6 +60,21 @@ class RenderXyCustomItemBlock extends IItemRenderer {
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
     RenderHelper.renderTextureAsBlock(data(0).asInstanceOf[RenderBlocks], ProjectXYCoreProxy.animationFx.texture, offset, offset, offset, new ColourRGBA(r, g, b, 255).rgb())
     RenderHelper.renderTextureAsBlock(data(0).asInstanceOf[RenderBlocks], Block.getBlockFromItem(item.getItem), item.getItemDamage, offset, offset, offset, colorMultiplier)
+
+    Block.getBlockFromItem(item.getItem) match {
+      case colorMult: BlockXyCustom =>
+        colorMult.sub_blocks(item.getItemDamage) match {
+          case connected: TConnectedTextureBlock => RenderHelper.renderTextureAsBlock(
+            data(0).asInstanceOf[RenderBlocks],
+            CTRegistry.getMainFaceIcon(connected.connectedFolder),
+            offset,
+            offset,
+            offset,
+            new ColourRGBA(255, 255, 255, 255).rgb())
+          case _ =>
+        }
+      case _ =>
+    }
     GL11.glPopAttrib()
   }
 

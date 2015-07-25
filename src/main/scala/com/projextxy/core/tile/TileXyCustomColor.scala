@@ -1,5 +1,7 @@
 package com.projextxy.core.tile
 
+import codechicken.lib.colour.ColourRGBA
+import codechicken.lib.packet.PacketCustom
 import com.projextxy.core.tile.traits.{TCustomPacketHandler, TMachineTile}
 import com.projextxy.core.{ProjectXYCore, ProjectXyCPH}
 import net.minecraft.nbt.NBTTagCompound

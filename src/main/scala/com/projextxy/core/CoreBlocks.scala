@@ -2,6 +2,8 @@ package com.projextxy.core
 
 import com.projextxy.core.blocks.glow._
 import com.projextxy.core.blocks.item.{ItemBLockColorContainer, ItemBlockColor}
+import com.projextxy.core.blocks.traits.TConnectedTextureBlock
+import com.projextxy.core.client.CTRegistry
 import com.projextxy.core.client.render.block.RenderSimpleGlow
 import com.projextxy.core.reference.ModColors
 import com.projextxy.util.LogHelper
@@ -19,6 +21,8 @@ object CoreBlocks {
   var blockXyMachineBlock: BlockXyGlow = null
 
 
+  var blockXyMachineBlockWhite: BlockXyGlow = null
+
   def init() {
     blockXyOre = new BlockXyOre()
 
@@ -30,17 +34,26 @@ object CoreBlocks {
     blockXyBrick.setBlockName("blockXyBrick")
     blockXyBrick.colors = ModColors.xyColors
 
-    blockXyMachineBlock = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId)
+    blockXyMachineBlock = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId) with TConnectedTextureBlock {
+      val connectedFolder = CTRegistry.CLEAN_CONNECTED_FOLDER
+    }
     blockXyMachineBlock.setBlockName("blockXyMachineBlock")
     blockXyMachineBlock.colors = ModColors.xyColors
 
-    blockXyCustom = new BlockXyCustom(List(blockXyBrick, blockXyStorage, blockXyMachineBlock))
+    blockXyMachineBlockWhite = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId) with TConnectedTextureBlock {
+      val connectedFolder = CTRegistry.CLEAN_CONNECTED_FOLDER
+    }
+    blockXyMachineBlockWhite.setBlockName("blockXyMachineBlockWhite")
+    blockXyMachineBlockWhite.colors = ModColors.xyColors
+
+    blockXyCustom = new BlockXyCustom(List(blockXyBrick, blockXyStorage, blockXyMachineBlock, blockXyMachineBlockWhite))
     blockXyColorizer = new BlockXyColorizer()
 
     registerBlock(blockXyOre, classOf[ItemBlockColor])
     registerBlock(blockXyStorage, classOf[ItemBlockColor])
     registerBlock(blockXyBrick, classOf[ItemBlockColor])
     registerBlock(blockXyMachineBlock, classOf[ItemBlockColor])
+    registerBlock(blockXyMachineBlockWhite, classOf[ItemBlockColor])
     registerBlock(blockXyCustom, classOf[ItemBLockColorContainer])
     registerBlock(blockXyColorizer, classOf[ItemBLockColorContainer])
   }

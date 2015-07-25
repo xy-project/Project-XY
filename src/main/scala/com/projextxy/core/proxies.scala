@@ -1,8 +1,10 @@
 package com.projextxy.core
 
+import codechicken.lib.colour.ColourRGBA
+import codechicken.lib.packet.PacketCustom
 import com.projextxy.core.client.render.block.{RenderCustomGlow, RenderSimpleGlow}
 import com.projextxy.core.client.render.item.{RenderXyCustomItemBlock, XychoriumlItemRenderer}
-import com.projextxy.core.client.{AnimationFX, RenderTickHandler}
+import com.projextxy.core.client.{CTRegistry, AnimationFX, RenderTickHandler}
 import com.projextxy.core.generator.WorldGeneratorManager
 import com.projextxy.core.tile.{TileColorizer, TileXyCustomColor}
 import cpw.mods.fml.client.registry.RenderingRegistry
@@ -42,8 +44,8 @@ class ClientProxy extends CommonProxy {
   @SideOnly(Side.CLIENT)
   override def init(event: FMLInitializationEvent): Unit = {
     super.init(event)
+    CTRegistry.init()
     animationFx = new AnimationFX
-
     RenderingRegistry.registerBlockHandler(new RenderSimpleGlow)
     RenderingRegistry.registerBlockHandler(new RenderCustomGlow)
 
