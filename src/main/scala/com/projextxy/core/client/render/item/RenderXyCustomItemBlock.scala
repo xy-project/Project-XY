@@ -59,19 +59,21 @@ class RenderXyCustomItemBlock extends IItemRenderer {
     GL11.glEnable(GL11.GL_BLEND)
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
     RenderHelper.renderTextureAsBlock(data(0).asInstanceOf[RenderBlocks], ProjectXYCoreProxy.animationFx.texture, offset, offset, offset, new ColourRGBA(r, g, b, 255).rgb())
-    RenderHelper.renderTextureAsBlock(data(0).asInstanceOf[RenderBlocks], Block.getBlockFromItem(item.getItem), item.getItemDamage, offset, offset, offset, colorMultiplier)
+
 
     Block.getBlockFromItem(item.getItem) match {
       case colorMult: BlockXyCustom =>
         colorMult.sub_blocks(item.getItemDamage) match {
-          case connected: TConnectedTextureBlock => RenderHelper.renderTextureAsBlock(
+          case connected: TConnectedTextureBlock =>
+            RenderHelper.renderTextureAsBlock(
             data(0).asInstanceOf[RenderBlocks],
-            CTRegistry.getMainFaceIcon(connected.connectedFolder),
+            CTRegistry.getTexture(connected.connectedFolder).icons(0),
             offset,
             offset,
             offset,
             new ColourRGBA(255, 255, 255, 255).rgb())
           case _ =>
+            RenderHelper.renderTextureAsBlock(data(0).asInstanceOf[RenderBlocks], Block.getBlockFromItem(item.getItem), item.getItemDamage, offset, offset, offset, colorMultiplier)
         }
       case _ =>
     }

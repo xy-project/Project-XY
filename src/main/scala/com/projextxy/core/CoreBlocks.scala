@@ -99,12 +99,13 @@ object CoreBlocks {
 
   private def initMachineBlocks(): Unit = {
     blockXyMachineBlock = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId) with TConnectedTextureBlock {
-      val connectedFolder = CTRegistry.CLEAN_CONNECTED_FOLDER
+      val connectedFolder = CTRegistry.XY_MACHINE_FOLDER
     }
     blockXyMachineBlock.setBlockName("blockXyMachineBlock")
     blockXyMachineBlock.colors = ModColors.xyColors
+
     blockXyMachineBlockWhite = new BlockXyGlow(Material.rock, RenderSimpleGlow.modelId) with TConnectedTextureBlock {
-      val connectedFolder = CTRegistry.CLEAN_CONNECTED_FOLDER
+      val connectedFolder = CTRegistry.XY_MACHINE_WHITE_FOLDER
     }
     blockXyMachineBlockWhite.setBlockName("blockXyMachineBlockWhite")
     blockXyMachineBlockWhite.colors = ModColors.xyColors
