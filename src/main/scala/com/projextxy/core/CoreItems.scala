@@ -14,6 +14,7 @@ object CoreItems {
   def init() = {
     itemXychorium = new ItemXychorium()
     itemXychoridite = new ItemXychoridite()
+
     itemXyColorMatrixUpgrade = new ItemXy()
     itemXyColorMatrixUpgrade.setTextureName("itemXyColorMatrixUpgrade")
     itemXyColorMatrixUpgrade.setUnlocalizedName("itemXyColorMatrixUpgrade")

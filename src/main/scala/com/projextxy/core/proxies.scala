@@ -8,6 +8,7 @@ import com.projextxy.core.client.{CTRegistry, AnimationFX, RenderTickHandler}
 import com.projextxy.core.generator.WorldGeneratorManager
 import com.projextxy.core.tile.{TileColorizer, TileXyCustomColor}
 import cpw.mods.fml.client.registry.RenderingRegistry
+import cpw.mods.fml.common.FMLCommonHandler
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.{Side, SideOnly}
@@ -39,6 +40,8 @@ class ClientProxy extends CommonProxy {
   @SideOnly(Side.CLIENT)
   override def preInit(event: FMLPreInitializationEvent): Unit = {
     super.preInit(event)
+
+    MinecraftForge.EVENT_BUS.register(RenderTickHandler)
   }
 
   @SideOnly(Side.CLIENT)
@@ -54,7 +57,6 @@ class ClientProxy extends CommonProxy {
     MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.blockXyColorizer), new RenderXyCustomItemBlock)
     PacketCustom.assignHandler(ProjectXYCore.MOD_ID, ProjectXyCPH)
 
-    MinecraftForge.EVENT_BUS.register(RenderTickHandler)
   }
 
   @SideOnly(Side.CLIENT)
@@ -67,6 +69,9 @@ class ClientProxy extends CommonProxy {
 
       rainbowColors(j) = new ColourRGBA(math.floor(red).toInt, math.floor(green).toInt, math.floor(blue).toInt, 255)
     }
+
+    FMLCommonHandler.instance.bus.register(RenderTickHandler)
+    MinecraftForge.EVENT_BUS.register(RenderTickHandler)
     super.postInit(event)
   }
 }

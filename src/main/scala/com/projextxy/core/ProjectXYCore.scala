@@ -7,10 +7,13 @@ import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationE
 import cpw.mods.fml.common.network.NetworkRegistry
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.{Item, ItemStack}
+import net.minecraft.nbt.NBTTagCompound
 
-@Mod(modid = "ProjectXyCore", name = "Project XY", modLanguage = "scala")
+import scala.util.Random
+
+@Mod(modid = "ProjectXy", name = "Project XY", modLanguage = "scala")
 object ProjectXYCore {
-  val MOD_ID = "ProjectXyCore"
+  val MOD_ID = "ProjectXy"
 
   val tabBlock: CreativeTabs = new CreativeTabs(CreativeTabs.getNextID, MOD_ID.toLowerCase + ".tabCoreBlocks") {
     override def getIconItemStack: ItemStack = new ItemStack(CoreBlocks.blockXyOre, 1, 2)
@@ -22,6 +25,19 @@ object ProjectXYCore {
     override def getIconItemStack: ItemStack = new ItemStack(CoreItems.itemXychorium, 1, 2)
 
     def getTabIconItem: Item = getIconItemStack.getItem
+  }
+
+  val tabCustomColored = new CreativeTabs(CreativeTabs.getNextID, MOD_ID.toLowerCase + ".tabCustomBlocks") {
+    override def getIconItemStack: ItemStack = {
+      val stack = new ItemStack(CoreBlocks.blockXyCustom, 1, 0)
+
+      val compound = new NBTTagCompound
+      compound.setBoolean("lsd", true)
+      stack.stackTagCompound = compound
+      stack
+    }
+
+    override def getTabIconItem: Item = getIconItemStack.getItem
   }
 
   var instance = this

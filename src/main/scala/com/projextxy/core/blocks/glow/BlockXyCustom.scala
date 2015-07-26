@@ -2,7 +2,7 @@ package com.projextxy.core.blocks.glow
 
 import java.util
 
-import com.projextxy.core.ProjectXYCoreProxy
+import com.projextxy.core.{ProjectXYCore, ProjectXYCoreProxy}
 import com.projextxy.core.blocks.BlockXy
 import com.projextxy.core.blocks.traits.MachineBlock
 import com.projextxy.core.client.render.block.RenderCustomGlow
@@ -20,6 +20,7 @@ import net.minecraft.world.{IBlockAccess, World}
 class BlockXyCustom(blocks: List[BlockXyGlow]) extends BlockXy(Material.rock) with MachineBlock {
   setBlockName("blockXyCustom")
   setHardness(0.5F)
+  setCreativeTab(ProjectXYCore.tabCustomColored)
 
   val sub_blocks: List[BlockXyGlow] = blocks
 

@@ -5,7 +5,7 @@ import codechicken.lib.vec.Vector3
 import com.projextxy.core.ProjectXYCoreProxy
 import com.projextxy.core.blocks.glow.{BlockXyCustom, ColorMultiplier}
 import com.projextxy.core.blocks.traits.TConnectedTextureBlock
-import com.projextxy.core.client.CTRegistry
+import com.projextxy.core.client.{RenderTickHandler, CTRegistry}
 import com.projextxy.lib.cofh.render.RenderHelper
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.RenderBlocks
@@ -14,9 +14,6 @@ import net.minecraftforge.client.IItemRenderer
 import net.minecraftforge.client.IItemRenderer.{ItemRenderType, ItemRendererHelper}
 import org.lwjgl.opengl.GL11
 
-/**
- * Created by Adam on 7/12/2015.
- */
 class RenderXyCustomItemBlock extends IItemRenderer {
   override def handleRenderType(item: ItemStack, renderType: ItemRenderType): Boolean = true
 
@@ -28,9 +25,16 @@ class RenderXyCustomItemBlock extends IItemRenderer {
     var b: Int = 255
 
     if (item.stackTagCompound != null) {
-      r = item.stackTagCompound.getInteger("r")
-      g = item.stackTagCompound.getInteger("g")
-      b = item.stackTagCompound.getInteger("b")
+      if(item.stackTagCompound.hasKey("lsd")){
+        r = RenderTickHandler.r
+        g = RenderTickHandler.g
+        b = RenderTickHandler.b
+      } else {
+        r = item.stackTagCompound.getInteger("r")
+        g = item.stackTagCompound.getInteger("g")
+        b = item.stackTagCompound.getInteger("b")
+      }
+
     }
 
     def offset: Double = {
