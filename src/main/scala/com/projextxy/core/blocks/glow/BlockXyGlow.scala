@@ -12,6 +12,7 @@ import net.minecraft.entity.EnumCreatureType
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
+import net.minecraftforge.client.ForgeHooksClient
 
 class BlockXyGlow(mat: Material, renderType: Int) extends BlockXy(mat) {
   var colors: List[MCColors] = MCColors.VALID_COLORS.toList

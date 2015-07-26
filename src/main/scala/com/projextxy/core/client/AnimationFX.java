@@ -45,9 +45,14 @@ public class AnimationFX extends TextureFX {
                 if (this.blue[(i + j * this.tileSizeBase)] < 0.0F) {
                     this.blue[(i + j * this.tileSizeBase)] = 0.0F;
                 }
-                this.alpha[(i + j * this.tileSizeBase)] -= 0.052F;
-                if (Math.random() < 0.005D) {
-                    this.alpha[(i + j * this.tileSizeBase)] = 1.33F;
+                this.alpha[(i + j * this.tileSizeBase)] -= 0.04F;
+
+                if(this.alpha[(i + j * this.tileSizeBase)] > 1.0){
+                    this.alpha[(i + j * this.tileSizeBase)] -= 0.05F;
+                }
+
+                if (Math.random() < 0.0055D) {
+                    this.alpha[(i + j * this.tileSizeBase)] = 1.4F;
                 }
             }
         }

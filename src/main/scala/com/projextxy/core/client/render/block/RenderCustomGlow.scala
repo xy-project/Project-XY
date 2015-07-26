@@ -36,6 +36,7 @@ class RenderCustomGlow extends RenderBlock with ISimpleBlockRenderingHandler {
             fakeRenderer.setOverrideBlockTexture(texture)
             fakeRenderer.setWorld(world)
             fakeRenderer.curBlock = block
+            fakeRenderer.changeBounds = true
             fakeRenderer.curMeta = world.getBlockMetadata(x, y, z)
             fakeRenderer.setRenderBoundsFromBlock(block)
             GL11.glEnable(GL11.GL_BLEND)

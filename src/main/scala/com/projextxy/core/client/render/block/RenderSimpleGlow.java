@@ -17,9 +17,11 @@ import com.projextxy.core.client.render.connected.IconConnectedTexture;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
+import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
+import net.minecraftforge.client.MinecraftForgeClient;
 import org.lwjgl.opengl.GL11;
 
 public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderingHandler {
@@ -74,6 +76,7 @@ public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderi
             getFakeRender().setWorld(world);
             getFakeRender().curBlock = block;
             getFakeRender().curMeta = world.getBlockMetadata(x, y, z);
+            getFakeRender().changeBounds = true;
             getFakeRender().setRenderBoundsFromBlock(block);
             GL11.glEnable(GL11.GL_BLEND);
             return getFakeRender().renderStandardBlock(block, x, y, z);

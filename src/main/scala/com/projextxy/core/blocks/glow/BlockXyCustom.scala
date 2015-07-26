@@ -55,7 +55,7 @@ class BlockXyCustom(blocks: List[BlockXyGlow]) extends BlockXy(Material.rock) wi
     blocks(world.getBlockMetadata(x, y, z)) match {
       case block: ColorMultiplier =>
         world.getTileEntity(x, y, z) match {
-          case cusotm: TileXyCustomColor => return cusotm.color
+          case custom: TileXyCustomColor => custom.color
           case _ => super.colorMultiplier(world, x, y, z)
         }
       case _ => super.colorMultiplier(world, x, y, z)

@@ -16,6 +16,7 @@ public class ConnectedRenderBlocks
     public Block curBlock = null;
     public int curMeta = 0;
     public boolean isOpaque = false;
+    public boolean changeBounds = false;
 
     public void setWorld(IBlockAccess blockAccess) {
         this.blockAccess = blockAccess;
@@ -73,20 +74,28 @@ public class ConnectedRenderBlocks
                 double offsetX = 0;
                 double offsetY = 0;
                 double offsetZ = 0;
-                switch (side) {
-                    case 0:
-                        offsetY -= .002;
-                    case 1:
-                        offsetY += .0001;
-                    case 2:
-                        offsetZ -= .002;
-                    case 3:
-                        offsetZ += .0001;
-                    case 4:
-                        offsetX -= .002;
-                    case 5:
-                        offsetX += .0001;
-                }
+                if (changeBounds)
+                    switch (side) {
+                        case 0:
+                            offsetY -= .0001;
+                            break;
+                        case 1:
+                            offsetY += .0001;
+                            break;
+                        case 2:
+                            offsetZ -= .0001;
+                            break;
+                        case 3:
+                            offsetZ += .0001;
+                            break;
+                        case 4:
+                            offsetX -= .0001;
+                            break;
+                        case 5:
+                            offsetX += .0001;
+                            break;
+                    }
+
                 setLightAndColor(0.5D + u[j] * 0.5D, 0.5D + v[j] * 0.5D, side);
                 t.addVertexWithUV(cx + offsetX, cy + offsetY, cz + offsetZ, icon.getInterpolatedU(16.0D - (8.0D + u[j] * 8.0D)), icon.getInterpolatedV(16.0D - (8.0D + v[j] * 8.0D)));
             }
@@ -102,24 +111,31 @@ public class ConnectedRenderBlocks
             double offsetX = 0;
             double offsetY = 0;
             double offsetZ = 0;
-            switch (side) {
-                case 0:
-                    offsetY -= .003;
-                case 1:
-                    offsetY += .0001;
-                case 2:
-                    offsetZ -= .002;
-                case 3:
-                    offsetZ += .0001;
-                case 4:
-                    offsetX -= .002;
-                case 5:
-                    offsetX += .0001;
-            }
+            if (changeBounds)
+                switch (side) {
+                    case 0:
+                        offsetY -= .0001;
+                        break;
+                    case 1:
+                        offsetY += .0001;
+                        break;
+                    case 2:
+                        offsetZ -= .0001;
+                        break;
+                    case 3:
+                        offsetZ += .0001;
+                        break;
+                    case 4:
+                        offsetX -= .0001;
+                        break;
+                    case 5:
+                        offsetX += .0001;
+                        break;
+                }
 
             for (int k = 0; k < 4; k++) {
                 setLightAndColor(0.5D + u[j] * 0.25D + u[k] * 0.25D, 0.5D + v[j] * 0.25D + v[k] * 0.25D, side);
-                t.addVertexWithUV(cx + u[k] * ax * 0.25D + v[k] * bx * 0.25D + offsetX, cy + u[k] * ay * 0.25D + v[k] * by * 0.25D + offsetY, cz + u[k] * az * 0.25D + v[k] * bz * 0.25D  + offsetZ, icon.getInterpolatedU(16.0D - (8.0D + u[j] * 4.0D + u[k] * 4.0D)), icon.getInterpolatedV(16.0D - (8.0D + v[j] * 4.0D + v[k] * 4.0D)));
+                t.addVertexWithUV(cx + u[k] * ax * 0.25D + v[k] * bx * 0.25D + offsetX, cy + u[k] * ay * 0.25D + v[k] * by * 0.25D + offsetY, cz + u[k] * az * 0.25D + v[k] * bz * 0.25D + offsetZ, icon.getInterpolatedU(16.0D - (8.0D + u[j] * 4.0D + u[k] * 4.0D)), icon.getInterpolatedV(16.0D - (8.0D + v[j] * 4.0D + v[k] * 4.0D)));
             }
             icon.resetType();
         }

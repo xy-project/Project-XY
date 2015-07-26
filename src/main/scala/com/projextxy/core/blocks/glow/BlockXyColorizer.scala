@@ -25,7 +25,6 @@ class BlockXyColorizer extends BlockXy(Material.rock) with MachineBlock {
     }
   }
 
-
   override def onBlockActivated(world: World, x: Int, y: Int, z: Int, player: EntityPlayer, par6: Int, par7: Float, par8: Float, par9: Float): Boolean = {
     if (!player.isSneaking && world.getTileEntity(x, y, z).isInstanceOf[TileColorizer]) {
       player.openGui(ProjectXYCore, GuiHandler.GuiIds.RGB.id, world, x, y, z)
