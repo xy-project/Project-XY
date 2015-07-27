@@ -1,6 +1,5 @@
 package com.projextxy.core.client
 
-import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.eventhandler.SubscribeEvent
 import cpw.mods.fml.common.gameevent.TickEvent
 import cpw.mods.fml.common.gameevent.TickEvent.Phase

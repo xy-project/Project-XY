@@ -2,18 +2,19 @@ package com.projextxy.core.blocks.glow
 
 import java.util
 
-import com.projextxy.core.{ProjectXYCore, ProjectXYCoreProxy}
 import com.projextxy.core.blocks.BlockXy
-import com.projextxy.core.blocks.traits.MachineBlock
+import com.projextxy.core.blocks.traits.{ColorMultiplier, MachineBlock}
 import com.projextxy.core.client.render.block.RenderCustomGlow
 import com.projextxy.core.tile.TileXyCustomColor
+import com.projextxy.core.{ProjectXYCore, ProjectXYCoreProxy}
 import net.minecraft.block.material.Material
 import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.entity.EnumCreatureType
+import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.tileentity.TileEntity
-import net.minecraft.util.IIcon
+import net.minecraft.util.{IIcon, MovingObjectPosition}
 import net.minecraft.world.{IBlockAccess, World}
 
 
@@ -66,6 +67,18 @@ class BlockXyCustom(blocks: List[BlockXyGlow]) extends BlockXy(Material.rock) wi
   override def canCreatureSpawn(creatureType: EnumCreatureType, world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = false
 
   override def getRenderType: Int = RenderCustomGlow.renderId
+
+  override def getPickBlock(target: MovingObjectPosition, world: World, x: Int, y: Int, z: Int, player: EntityPlayer): ItemStack = {
+    val meta = world.getBlockMetadata(x, y, z)
+    val tile = world.getTileEntity(x, y, z)
+
+    tile match {
+      case tileColor: TileXyCustomColor => buildColoredStack(meta, tileColor.r, tileColor.g, tileColor.b)
+      case _ => super.getPickBlock(target, world, x, y, z, player)
+    }
+  }
+
+  override def damageDropped(meta: Int): Int = meta
 }
 
 

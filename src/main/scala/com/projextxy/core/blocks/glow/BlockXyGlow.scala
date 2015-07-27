@@ -3,7 +3,7 @@ package com.projextxy.core.blocks.glow
 import java.util
 
 import com.projextxy.core.blocks.BlockXy
-import com.projextxy.core.reference.MCColors
+import com.projextxy.core.reference.{MCColors, ModColors}
 import com.projextxy.core.{ProjectXYCore, ProjectXYCoreProxy}
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
@@ -12,10 +12,10 @@ import net.minecraft.entity.EnumCreatureType
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.util.IIcon
 import net.minecraft.world.IBlockAccess
-import net.minecraftforge.client.ForgeHooksClient
 
 class BlockXyGlow(mat: Material, renderType: Int) extends BlockXy(mat) {
-  var colors: List[MCColors] = MCColors.VALID_COLORS.toList
+  setHardness(1.0F)
+  var colors: List[MCColors] = ModColors.xyColors
 
   override def getRenderType: Int = renderType
 

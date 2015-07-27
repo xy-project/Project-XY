@@ -77,22 +77,16 @@ public class ConnectedRenderBlocks
                 if (changeBounds)
                     switch (side) {
                         case 0:
-                            offsetY -= .0001;
+                            offsetY -= .0002;
                             break;
                         case 1:
-                            offsetY += .0001;
+                            offsetY += .0002;
                             break;
                         case 2:
-                            offsetZ -= .0001;
+                            offsetZ -= .0002;
                             break;
                         case 3:
-                            offsetZ += .0001;
-                            break;
-                        case 4:
-                            offsetX -= .0001;
-                            break;
-                        case 5:
-                            offsetX += .0001;
+                            offsetZ += .0002;
                             break;
                     }
 
@@ -114,22 +108,22 @@ public class ConnectedRenderBlocks
             if (changeBounds)
                 switch (side) {
                     case 0:
-                        offsetY -= .0001;
+                        offsetY -= .0002;
                         break;
                     case 1:
-                        offsetY += .0001;
+                        offsetY += .0002;
                         break;
                     case 2:
-                        offsetZ -= .0001;
+                        offsetZ -= .0002;
                         break;
                     case 3:
-                        offsetZ += .0001;
+                        offsetZ += .0002;
                         break;
                     case 4:
-                        offsetX -= .0001;
+                        offsetX -= .0002;
                         break;
                     case 5:
-                        offsetX += .0001;
+                        offsetX += .0002;
                         break;
                 }
 

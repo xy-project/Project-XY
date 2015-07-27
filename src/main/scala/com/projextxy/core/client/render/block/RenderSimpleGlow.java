@@ -9,7 +9,7 @@ import codechicken.lib.vec.Translation;
 import codechicken.lib.vec.Vector3;
 import com.projextxy.core.blocks.glow.BlockXyGlow;
 import com.projextxy.core.blocks.glow.BlockXyGlow$;
-import com.projextxy.core.blocks.glow.ColorMultiplier;
+import com.projextxy.core.blocks.traits.ColorMultiplier;
 import com.projextxy.core.blocks.traits.TConnectedTextureBlock;
 import com.projextxy.core.client.CTRegistry$;
 import com.projextxy.core.client.render.connected.ConnectedRenderBlocks;
@@ -17,12 +17,9 @@ import com.projextxy.core.client.render.connected.IconConnectedTexture;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.client.registry.RenderingRegistry;
 import net.minecraft.block.Block;
-import net.minecraft.client.renderer.OpenGlHelper;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
-import net.minecraftforge.client.MinecraftForgeClient;
-import org.lwjgl.opengl.GL11;
 
 public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderingHandler {
     public static final int modelId = RenderingRegistry.getNextAvailableRenderId();
@@ -64,7 +61,6 @@ public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderi
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
         final Tessellator tess = Tessellator.instance;
         BlockXyGlow blockXyGlow = (BlockXyGlow) block;
-
         tess.setBrightness(blockXyGlow.getBrightness(world, x, y, z));
         tess.setColorRGBA_I(blockXyGlow.getColor(world.getBlockMetadata(x, y, z)), 255);
         if (block instanceof TConnectedTextureBlock) {
@@ -78,8 +74,7 @@ public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderi
             getFakeRender().curMeta = world.getBlockMetadata(x, y, z);
             getFakeRender().changeBounds = true;
             getFakeRender().setRenderBoundsFromBlock(block);
-            GL11.glEnable(GL11.GL_BLEND);
-            return getFakeRender().renderStandardBlock(block, x, y, z);
+            getFakeRender().renderStandardBlock(block, x, y, z);
         } else {
             renderAllSides(world, x, y, z, block, renderer, BlockXyGlow$.MODULE$.baseIcon(), false);
             renderer.setRenderBoundsFromBlock(block);

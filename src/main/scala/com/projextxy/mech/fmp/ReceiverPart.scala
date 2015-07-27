@@ -2,7 +2,7 @@ package com.projextxy.mech.fmp
 
 import codechicken.lib.render.CCRenderState
 import codechicken.lib.render.uv.IconTransformation
-import codechicken.lib.vec.{Vector3, Cuboid6}
+import codechicken.lib.vec.{Cuboid6, Vector3}
 import codechicken.multipart.TCuboidPart
 import com.projextxy.core.reference.MCColors
 import com.projextxy.core.{ProjectXYCore, ProjectXYCoreProxy}

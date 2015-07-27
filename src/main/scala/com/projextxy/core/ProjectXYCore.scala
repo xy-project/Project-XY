@@ -9,8 +9,6 @@ import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.nbt.NBTTagCompound
 
-import scala.util.Random
-
 @Mod(modid = "ProjectXy", name = "Project XY", modLanguage = "scala")
 object ProjectXYCore {
   val MOD_ID = "ProjectXy"

@@ -1,16 +1,16 @@
 package com.projextxy.core.client.render.block
 
 import com.projextxy.core.CoreBlocks
-import com.projextxy.core.blocks.glow.{BlockXyGlow$, BlockXyGlow}
+import com.projextxy.core.blocks.glow.BlockXyGlow
 import com.projextxy.core.blocks.traits.TConnectedTextureBlock
-import com.projextxy.core.client.render.connected.{IconConnectedTexture, ConnectedRenderBlocks}
-import com.projextxy.core.client.{CTRegistry$, CTRegistry}
+import com.projextxy.core.client.CTRegistry
+import com.projextxy.core.client.render.block.RenderCustomGlow.fakeRenderer
+import com.projextxy.core.client.render.connected.{ConnectedRenderBlocks, IconConnectedTexture}
 import com.projextxy.core.tile.TileXyCustomColor
 import cpw.mods.fml.client.registry.{ISimpleBlockRenderingHandler, RenderingRegistry}
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.{RenderBlocks, Tessellator}
 import net.minecraft.world.IBlockAccess
-import RenderCustomGlow.fakeRenderer
 import org.lwjgl.opengl.GL11
 
 class RenderCustomGlow extends RenderBlock with ISimpleBlockRenderingHandler {

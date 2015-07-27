@@ -2,8 +2,8 @@ package com.projextxy.mech
 
 import java.util
 
-import codechicken.lib.vec.{Vector3, BlockCoord}
-import codechicken.multipart.{TMultiPart, TItemMultiPart}
+import codechicken.lib.vec.{BlockCoord, Vector3}
+import codechicken.multipart.{TItemMultiPart, TMultiPart}
 import com.projextxy.core.ProjectXYCore
 import com.projextxy.mech.fmp.{NodePart, ProviderPart, ReceiverPart}
 import net.minecraft.creativetab.CreativeTabs

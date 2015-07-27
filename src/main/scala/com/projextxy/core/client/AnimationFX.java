@@ -40,19 +40,19 @@ public class AnimationFX extends TextureFX {
                         var3 += this.red[(mod1 + mod2 * this.tileSizeBase)];
                     }
                 }
-                this.green[(i + j * this.tileSizeBase)] = (var3 / 10.0F + (this.blue[((i + 0 & this.tileSizeMask) + (j + 0 & this.tileSizeMask) * this.tileSizeBase)] + this.blue[((i + 1 & this.tileSizeMask) + (j + 0 & this.tileSizeMask) * this.tileSizeBase)] + this.blue[((i + 1 & this.tileSizeMask) + (j + 1 & this.tileSizeMask) * this.tileSizeBase)] + this.blue[((i + 0 & this.tileSizeMask) + (j + 1 & this.tileSizeMask) * this.tileSizeBase)]) / 4.0F * 0.8F);
+                this.green[(i + j * this.tileSizeBase)] = (var3 / 10.0F
+                        + (this.blue[((i & this.tileSizeMask) + (j & this.tileSizeMask) * this.tileSizeBase)]
+                        + this.blue[((i + 1 & this.tileSizeMask) + (j & this.tileSizeMask) * this.tileSizeBase)]
+                        + this.blue[((i + 1 & this.tileSizeMask) + (j + 1 & this.tileSizeMask) * this.tileSizeBase)]
+                        + this.blue[((i & this.tileSizeMask) + (j + 1 & this.tileSizeMask) * this.tileSizeBase)]) / 4.0F * .8F);
                 this.blue[(i + j * this.tileSizeBase)] += this.alpha[(i + j * this.tileSizeBase)] * 0.01F;
                 if (this.blue[(i + j * this.tileSizeBase)] < 0.0F) {
                     this.blue[(i + j * this.tileSizeBase)] = 0.0F;
                 }
-                this.alpha[(i + j * this.tileSizeBase)] -= 0.04F;
-
-                if(this.alpha[(i + j * this.tileSizeBase)] > 1.0){
-                    this.alpha[(i + j * this.tileSizeBase)] -= 0.05F;
-                }
+                this.alpha[(i + j * this.tileSizeBase)] -= 0.052F;
 
                 if (Math.random() < 0.0055D) {
-                    this.alpha[(i + j * this.tileSizeBase)] = 1.4F;
+                    this.alpha[(i + j * this.tileSizeBase)] = 1.33F;
                 }
             }
         }

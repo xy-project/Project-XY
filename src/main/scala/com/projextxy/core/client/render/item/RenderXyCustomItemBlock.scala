@@ -3,9 +3,9 @@ package com.projextxy.core.client.render.item
 import codechicken.lib.colour.ColourRGBA
 import codechicken.lib.vec.Vector3
 import com.projextxy.core.ProjectXYCoreProxy
-import com.projextxy.core.blocks.glow.{BlockXyCustom, ColorMultiplier}
-import com.projextxy.core.blocks.traits.TConnectedTextureBlock
-import com.projextxy.core.client.{RenderTickHandler, CTRegistry}
+import com.projextxy.core.blocks.glow.BlockXyCustom
+import com.projextxy.core.blocks.traits.{ColorMultiplier, TConnectedTextureBlock}
+import com.projextxy.core.client.{CTRegistry, RenderTickHandler}
 import com.projextxy.lib.cofh.render.RenderHelper
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.RenderBlocks
@@ -25,7 +25,7 @@ class RenderXyCustomItemBlock extends IItemRenderer {
     var b: Int = 255
 
     if (item.stackTagCompound != null) {
-      if(item.stackTagCompound.hasKey("lsd")){
+      if (item.stackTagCompound.hasKey("lsd")) {
         r = RenderTickHandler.r
         g = RenderTickHandler.g
         b = RenderTickHandler.b
@@ -70,12 +70,12 @@ class RenderXyCustomItemBlock extends IItemRenderer {
         colorMult.sub_blocks(item.getItemDamage) match {
           case connected: TConnectedTextureBlock =>
             RenderHelper.renderTextureAsBlock(
-            data(0).asInstanceOf[RenderBlocks],
-            CTRegistry.getTexture(connected.connectedFolder).icons(0),
-            offset,
-            offset,
-            offset,
-            new ColourRGBA(255, 255, 255, 255).rgb())
+              data(0).asInstanceOf[RenderBlocks],
+              CTRegistry.getTexture(connected.connectedFolder).icons(0),
+              offset,
+              offset,
+              offset,
+              new ColourRGBA(255, 255, 255, 255).rgb())
           case _ =>
             RenderHelper.renderTextureAsBlock(data(0).asInstanceOf[RenderBlocks], Block.getBlockFromItem(item.getItem), item.getItemDamage, offset, offset, offset, colorMultiplier)
         }

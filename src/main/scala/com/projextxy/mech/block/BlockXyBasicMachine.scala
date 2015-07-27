@@ -37,6 +37,10 @@ class BlockXyBasicMachine extends BlockXyGlow(Material.rock, RenderSimpleGlow.mo
     searchForAll(world, x, y, z)
   }
 
+  override def onBlockAdded(world: World, x: Int, y: Int, z: Int): Unit = {
+    searchForAll(world, x, y, z)
+  }
+
   def searchForAll(world: World, x: Int, y: Int, z: Int): Unit = {
     world.getBlockMetadata(x, y, z) match {
       case XY_WATER_META =>
@@ -77,10 +81,6 @@ class BlockXyBasicMachine extends BlockXyGlow(Material.rock, RenderSimpleGlow.mo
           world.setBlock(x + direction.offsetX, y + direction.offsetY, z + direction.offsetZ, replaceWith)
         }
     }
-  }
-
-  override def onBlockAdded(world: World, x: Int, y: Int, z: Int): Unit = {
-    searchForAll(world, x, y, z)
   }
 
   override def updateTick(world: World, x: Int, y: Int, z: Int, rand: Random): Unit = {

@@ -1,7 +1,7 @@
 package com.projextxy.mech.fmp
 
-import codechicken.multipart.{TMultiPart, MultiPartRegistry}
 import codechicken.multipart.MultiPartRegistry.IPartFactory
+import codechicken.multipart.{MultiPartRegistry, TMultiPart}
 import com.projextxy.util.LogHelper
 
 object FMP extends IPartFactory {
