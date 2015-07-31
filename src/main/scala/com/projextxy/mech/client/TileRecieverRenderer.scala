@@ -14,8 +14,8 @@ class TileRecieverRenderer extends TileEntitySpecialRenderer {
 }
 
 object TileRecieverRenderer {
+  val models = CCModel.parseObjModels(new ResourceLocation(ProjectXYCore.MOD_ID.toLowerCase, "models/nodeReceiver.obj"), new SwapYZ)
   val icosahedron = CCModel.parseObjModels(new ResourceLocation(ProjectXYCore.MOD_ID.toLowerCase, "models/truncatedIcosahedron.obj"), new SwapYZ).get("hedron").computeNormals()
   val base = models.get("base").computeNormals()
   val pedestal = models.get("pedestal").computeNormals()
-  private val models = CCModel.parseObjModels(new ResourceLocation(ProjectXYCore.MOD_ID.toLowerCase, "models/nodeReceiver.obj"), new SwapYZ)
 }

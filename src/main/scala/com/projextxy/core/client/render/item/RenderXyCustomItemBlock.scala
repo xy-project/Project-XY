@@ -7,7 +7,7 @@ import com.projextxy.core.blocks.glow.{BlockXyColorizer, BlockXyCustom}
 import com.projextxy.core.blocks.traits.{ColorMultiplier, TConnectedTextureBlock}
 import com.projextxy.core.client.render.block.RenderBlock
 import com.projextxy.core.client.{CTRegistry, RenderTickHandler}
-import com.projextxy.lib.cofh.render.RenderHelper
+import com.projextxy.lib.cofh.RenderHelper
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.RenderBlocks
 import net.minecraft.item.ItemStack

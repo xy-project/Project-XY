@@ -8,7 +8,6 @@ import codechicken.lib.vec.Vector3
 import com.projextxy.core.blocks.glow.BlockXyGlow
 import com.projextxy.core.reference.MCColors
 import com.projextxy.core.resource.ResourceLib
-import com.projextxy.lib.cofh.render.RenderHelper
 import net.minecraft.client.gui.inventory.GuiContainer
 import net.minecraft.inventory.{Container, Slot}
 import org.lwjgl.opengl.GL11
@@ -38,7 +37,7 @@ abstract class GuiCommon(container: Container) extends GuiContainer(container) {
     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
     drawBar(x, y)
     val width: Double = 26 * progress
-    RenderHelper.setBlockTextureSheet()
+    ResourceLib.blockSheet.bind()
     CCRenderState.startDrawing()
     colourRGBA.glColour()
     RenderUtils.renderFluidQuad(

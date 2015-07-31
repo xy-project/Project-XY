@@ -8,7 +8,7 @@ import codechicken.lib.render.uv.IconTransformation;
 import codechicken.lib.vec.*;
 import com.projextxy.core.CoreItems;
 import com.projextxy.core.ProjectXYCoreProxy;
-import com.projextxy.lib.cofh.render.RenderHelper;
+import com.projextxy.core.resource.ResourceLib;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
@@ -49,9 +49,9 @@ public class XychoriumlItemRenderer implements IItemRenderer {
                 break;
         }
 
-        RenderHelper.setBlockTextureSheet();
+        ResourceLib.itemSheet().bind();
         model.setColour(new ColourRGBA(CoreItems.itemXychorium().colors().apply(item.getItemDamage()).rgb << 8 | 0xFF).rgba()).computeNormals().render(transformation, new IconTransformation(ProjectXYCoreProxy.animationFx().texture));
         CCRenderState.draw();
-        RenderHelper.setItemTextureSheet();
+        ResourceLib.blockSheet().bind();
     }
 }
