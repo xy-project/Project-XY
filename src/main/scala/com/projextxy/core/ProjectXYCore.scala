@@ -9,9 +9,9 @@ import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.nbt.NBTTagCompound
 
-@Mod(modid = "ProjectXy", name = "Project XY", modLanguage = "scala")
+@Mod(modid = "ProjectXY", name = "Project XY", modLanguage = "scala", dependencies = "required-before:ProjectXYMech;required-after:CodeChickenCore;")
 object ProjectXYCore {
-  val MOD_ID = "ProjectXy"
+  val MOD_ID = "ProjectXY"
 
   val tabBlock: CreativeTabs = new CreativeTabs(CreativeTabs.getNextID, MOD_ID.toLowerCase + ".tabCoreBlocks") {
     override def getIconItemStack: ItemStack = new ItemStack(CoreBlocks.blockXyOre, 1, 2)

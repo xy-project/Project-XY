@@ -77,16 +77,22 @@ public class ConnectedRenderBlocks
                 if (changeBounds)
                     switch (side) {
                         case 0:
-                            offsetY -= .0002;
+                            offsetY -= .0004;
                             break;
                         case 1:
-                            offsetY += .0002;
+                            offsetY += .0004;
                             break;
                         case 2:
-                            offsetZ -= .0002;
+                            offsetZ -= .0004;
                             break;
                         case 3:
-                            offsetZ += .0002;
+                            offsetZ += .0004;
+                            break;
+                        case 4:
+                            offsetX -= .0004;
+                            break;
+                        case 5:
+                            offsetX += .0004;
                             break;
                     }
 
@@ -108,22 +114,22 @@ public class ConnectedRenderBlocks
             if (changeBounds)
                 switch (side) {
                     case 0:
-                        offsetY -= .0002;
+                        offsetY -= .0004;
                         break;
                     case 1:
-                        offsetY += .0002;
+                        offsetY += .0004;
                         break;
                     case 2:
-                        offsetZ -= .0002;
+                        offsetZ -= .0004;
                         break;
                     case 3:
-                        offsetZ += .0002;
+                        offsetZ += .0004;
                         break;
                     case 4:
-                        offsetX -= .0002;
+                        offsetX -= .0004;
                         break;
                     case 5:
-                        offsetX += .0002;
+                        offsetX += .0004;
                         break;
                 }
 
@@ -188,6 +194,7 @@ public class ConnectedRenderBlocks
         return 0;
     }
 
+    @Override
     public void renderFaceYNeg(Block block, double x, double y, double z, IIcon IIcon) {
         if (hasOverrideBlockTexture()) {
             IIcon = this.overrideBlockTexture;
@@ -199,6 +206,7 @@ public class ConnectedRenderBlocks
         }
     }
 
+    @Override
     public void renderFaceYPos(Block block, double x, double y, double z, IIcon IIcon) {
         if (hasOverrideBlockTexture()) {
             IIcon = this.overrideBlockTexture;
@@ -210,6 +218,7 @@ public class ConnectedRenderBlocks
         }
     }
 
+    @Override
     public void renderFaceZNeg(Block block, double x, double y, double z, IIcon IIcon) {
         if (hasOverrideBlockTexture()) {
             IIcon = this.overrideBlockTexture;
@@ -221,6 +230,7 @@ public class ConnectedRenderBlocks
         }
     }
 
+    @Override
     public void renderFaceZPos(Block block, double x, double y, double z, IIcon IIcon) {
         if (hasOverrideBlockTexture()) {
             IIcon = this.overrideBlockTexture;
@@ -232,6 +242,7 @@ public class ConnectedRenderBlocks
         }
     }
 
+    @Override
     public void renderFaceXNeg(Block block, double x, double y, double z, IIcon IIcon) {
         if (hasOverrideBlockTexture()) {
             IIcon = this.overrideBlockTexture;
@@ -243,6 +254,7 @@ public class ConnectedRenderBlocks
         }
     }
 
+    @Override
     public void renderFaceXPos(Block block, double x, double y, double z, IIcon IIcon) {
         if (hasOverrideBlockTexture()) {
             IIcon = this.overrideBlockTexture;

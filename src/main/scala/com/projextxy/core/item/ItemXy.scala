@@ -5,5 +5,5 @@ import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.item.Item
 
 class ItemXy extends Item {
-  override def registerIcons(iconRegister: IIconRegister) = itemIcon = iconRegister.registerIcon(s"${ProjectXYCore.MOD_ID}:$getIconString")
+  override def registerIcons(iconRegister: IIconRegister) = itemIcon = iconRegister.registerIcon(s"${ProjectXYCore.MOD_ID}:$iconString")
 }

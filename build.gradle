@@ -39,7 +39,7 @@ apply plugin: "forge"
 
 group = "com.projectxy"
 archivesBaseName = "Project-XY"
-version = "1.7.10-0.1.0"
+version = "1.7.10-0.0.2-pre"
 
 minecraft {
     version = "1.7.10-10.13.4.1448-1.7.10"

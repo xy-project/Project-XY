@@ -27,6 +27,7 @@ class CommonProxy {
   def init(event: FMLInitializationEvent) {
     PacketCustom.assignHandler(ProjectXYCore.MOD_ID, new ServerPacketHandler)
     GameRegistry.registerWorldGenerator(new WorldGeneratorManager, 0)
+    RecipeHandler.init()
   }
 
   def postInit(event: FMLPostInitializationEvent) {

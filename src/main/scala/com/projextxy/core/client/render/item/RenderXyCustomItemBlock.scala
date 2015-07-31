@@ -3,8 +3,9 @@ package com.projextxy.core.client.render.item
 import codechicken.lib.colour.ColourRGBA
 import codechicken.lib.vec.Vector3
 import com.projextxy.core.ProjectXYCoreProxy
-import com.projextxy.core.blocks.glow.BlockXyCustom
+import com.projextxy.core.blocks.glow.{BlockXyColorizer, BlockXyCustom}
 import com.projextxy.core.blocks.traits.{ColorMultiplier, TConnectedTextureBlock}
+import com.projextxy.core.client.render.block.RenderBlock
 import com.projextxy.core.client.{CTRegistry, RenderTickHandler}
 import com.projextxy.lib.cofh.render.RenderHelper
 import net.minecraft.block.Block
@@ -69,6 +70,11 @@ class RenderXyCustomItemBlock extends IItemRenderer {
       case colorMult: BlockXyCustom =>
         colorMult.sub_blocks(item.getItemDamage) match {
           case connected: TConnectedTextureBlock =>
+            if (connected.renderBlockTexture) {
+              GL11.glTranslated(0.5, 0.5, 0.5)
+              RenderBlock.renderStandardInvBlock(data(0).asInstanceOf[RenderBlocks], connected, item.getItemDamage)
+              GL11.glTranslated(-0.5, -0.5, -0.5)
+            }
             RenderHelper.renderTextureAsBlock(
               data(0).asInstanceOf[RenderBlocks],
               CTRegistry.getTexture(connected.connectedFolder).icons(0),
@@ -79,7 +85,10 @@ class RenderXyCustomItemBlock extends IItemRenderer {
           case _ =>
             RenderHelper.renderTextureAsBlock(data(0).asInstanceOf[RenderBlocks], Block.getBlockFromItem(item.getItem), item.getItemDamage, offset, offset, offset, colorMultiplier)
         }
-      case _ =>
+      case colorizer: BlockXyColorizer =>
+        GL11.glTranslated(0.5, 0.5, 0.5)
+        RenderBlock.renderStandardInvBlock(data(0).asInstanceOf[RenderBlocks], colorizer, item.getItemDamage)
+        GL11.glTranslated(-0.5, -0.5, -0.5)
     }
     GL11.glPopAttrib()
   }

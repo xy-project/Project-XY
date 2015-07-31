@@ -4,4 +4,6 @@ import net.minecraft.block.Block
 
 trait TConnectedTextureBlock extends Block {
   def connectedFolder: String
+
+  def renderBlockTexture: Boolean
 }

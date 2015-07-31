@@ -4,7 +4,6 @@ import java.util.Random
 
 import com.projextxy.core.ProjectXYCore
 import com.projextxy.core.blocks.glow.BlockXyGlow
-import com.projextxy.core.client.render.block.RenderSimpleGlow
 import com.projextxy.core.reference.ModColors
 import com.projextxy.mech.block.BlockXyBasicMachine._
 import net.minecraft.block.Block
@@ -16,7 +15,7 @@ import net.minecraft.world.{IBlockAccess, World}
 import net.minecraftforge.common.IPlantable
 import net.minecraftforge.common.util.ForgeDirection
 
-class BlockXyBasicMachine extends BlockXyGlow(Material.rock, RenderSimpleGlow.modelId) {
+class BlockXyBasicMachine extends BlockXyGlow(Material.rock) {
   setBlockName("blockXyBasicMachine")
   setTickRandomly(true)
   colors = ModColors.basicMachineColors
@@ -34,10 +33,6 @@ class BlockXyBasicMachine extends BlockXyGlow(Material.rock, RenderSimpleGlow.mo
 
 
   override def onNeighborBlockChange(world: World, x: Int, y: Int, z: Int, block: Block) {
-    searchForAll(world, x, y, z)
-  }
-
-  override def onBlockAdded(world: World, x: Int, y: Int, z: Int): Unit = {
     searchForAll(world, x, y, z)
   }
 
@@ -81,6 +76,10 @@ class BlockXyBasicMachine extends BlockXyGlow(Material.rock, RenderSimpleGlow.mo
           world.setBlock(x + direction.offsetX, y + direction.offsetY, z + direction.offsetZ, replaceWith)
         }
     }
+  }
+
+  override def onBlockAdded(world: World, x: Int, y: Int, z: Int): Unit = {
+    searchForAll(world, x, y, z)
   }
 
   override def updateTick(world: World, x: Int, y: Int, z: Int, rand: Random): Unit = {

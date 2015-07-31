@@ -16,13 +16,13 @@ public class ContainerRGB extends Container {
 
     public ContainerRGB(InventoryPlayer inventoryPlayer, TileColorizer tileCustomColor) {
         this.tileColorizer = tileCustomColor;
-        this.addSlotToContainer(new Slot(tileCustomColor, TileColorizer.INPUT_INVENTORY_INDEX, 44, 90) {
+        this.addSlotToContainer(new Slot(tileCustomColor, TileColorizer.INPUT_INVENTORY_INDEX, 44, 67) {
             @Override
             public boolean isItemValid(ItemStack stack) {
                 return Block.getBlockFromItem(stack.getItem()).equals(CoreBlocks$.MODULE$.blockXyCustom());
             }
         });
-        this.addSlotToContainer(new Slot(tileCustomColor, TileColorizer.OUTPUT_INVENTORY_INDEX, 117, 90) {
+        this.addSlotToContainer(new Slot(tileCustomColor, TileColorizer.OUTPUT_INVENTORY_INDEX, 116, 67) {
             @Override
             public boolean isItemValid(ItemStack stack) {
                 return false;
@@ -33,13 +33,13 @@ public class ContainerRGB extends Container {
         // Add the player's inventory slots to the container
         for (int inventoryRowIndex = 0; inventoryRowIndex < PLAYER_INVENTORY_ROWS; ++inventoryRowIndex) {
             for (int inventoryColumnIndex = 0; inventoryColumnIndex < PLAYER_INVENTORY_COLUMNS; ++inventoryColumnIndex) {
-                this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, inventoryColumnIndex * 18 + 8, 132 + inventoryRowIndex * 18));
+                this.addSlotToContainer(new Slot(inventoryPlayer, inventoryColumnIndex + inventoryRowIndex * 9 + 9, inventoryColumnIndex * 18 + 8, 103 + inventoryRowIndex * 18));
             }
         }
 
         // Add the player's action bar slots to the container
         for (int actionBarSlotIndex = 0; actionBarSlotIndex < PLAYER_INVENTORY_COLUMNS; ++actionBarSlotIndex) {
-            this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 8 + actionBarSlotIndex * 18, 190));
+            this.addSlotToContainer(new Slot(inventoryPlayer, actionBarSlotIndex, 8 + actionBarSlotIndex * 18, 162));
         }
     }
 

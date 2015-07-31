@@ -6,7 +6,7 @@ import com.projextxy.core.blocks.traits.TConnectedTextureBlock
 import com.projextxy.core.client.CTRegistry
 import com.projextxy.core.client.render.block.RenderCustomGlow.fakeRenderer
 import com.projextxy.core.client.render.connected.{ConnectedRenderBlocks, IconConnectedTexture}
-import com.projextxy.core.tile.TileXyCustomColor
+import com.projextxy.core.tile.{TileColorizer, TileXyCustomColor}
 import cpw.mods.fml.client.registry.{ISimpleBlockRenderingHandler, RenderingRegistry}
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.{RenderBlocks, Tessellator}
@@ -27,10 +27,12 @@ class RenderCustomGlow extends RenderBlock with ISimpleBlockRenderingHandler {
       case tileCustom: TileXyCustomColor =>
         tess.setBrightness(220)
         tess.setColorRGBA_I(tileCustom.color, 255)
+        RenderBlock.renderAllSides(world, x, y, z, block, renderer, BlockXyGlow.baseIcon, false)
 
         CoreBlocks.blockXyCustom.sub_blocks(world.getBlockMetadata(x, y, z)) match {
           case connectedBlock: TConnectedTextureBlock =>
-            RenderBlock.renderAllSides(world, x, y, z, block, renderer, BlockXyGlow.baseIcon, false)
+            if (connectedBlock.renderBlockTexture)
+              renderer.renderStandardBlock(block, x, y, z)
             val folder: String = connectedBlock.connectedFolder
             val texture: IconConnectedTexture = CTRegistry.getTexture(folder)
             fakeRenderer.setOverrideBlockTexture(texture)
@@ -42,11 +44,15 @@ class RenderCustomGlow extends RenderBlock with ISimpleBlockRenderingHandler {
             GL11.glEnable(GL11.GL_BLEND)
             return fakeRenderer.renderStandardBlock(block, x, y, z)
           case _ =>
-            RenderBlock.renderAllSides(world, x, y, z, block, renderer, BlockXyGlow.baseIcon, false)
             return renderer.renderStandardBlock(block, x, y, z);
         }
+
         true
-      case _ => false
+      case colorizer: TileColorizer =>
+        tess.setBrightness(220)
+        tess.setColorRGBA_I(colorizer.getColor, 255)
+        RenderBlock.renderAllSides(world, x, y, z, block, renderer, BlockXyGlow.baseIcon, false)
+        renderer.renderStandardBlock(block, x, y, z);
     }
   }
 }

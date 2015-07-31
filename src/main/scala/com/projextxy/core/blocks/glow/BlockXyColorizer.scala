@@ -2,6 +2,7 @@ package com.projextxy.core.blocks.glow
 
 import com.projextxy.core.blocks.BlockXy
 import com.projextxy.core.blocks.traits.MachineBlock
+import com.projextxy.core.client.render.block.RenderCustomGlow
 import com.projextxy.core.handler.GuiHandler
 import com.projextxy.core.tile.TileColorizer
 import com.projextxy.core.{CoreBlocks, ProjectXYCore}
@@ -38,5 +39,7 @@ class BlockXyColorizer extends BlockXy(Material.rock) with MachineBlock {
 
   override def createNewTileEntity(world: World, meta: Int): TileEntity = new TileColorizer
 
-  override def canCreatureSpawn(`type`: EnumCreatureType, world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = false
+  override def canCreatureSpawn(creature: EnumCreatureType, world: IBlockAccess, x: Int, y: Int, z: Int): Boolean = false
+
+  override def getRenderType: Int = RenderCustomGlow.renderId
 }

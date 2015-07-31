@@ -8,6 +8,7 @@ import net.minecraft.nbt.NBTTagCompound
 import net.minecraft.network.Packet
 import net.minecraft.tileentity.TileEntity
 
+//TODO: Change to color int instead of individual values to decrease packet size
 class TileXyCustomColor extends TileEntity with TMachineTile with TCustomPacketHandler {
   var r: Int = 255
   var g: Int = 255

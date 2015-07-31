@@ -3,6 +3,7 @@ package com.projextxy.core.blocks.glow
 import java.util
 
 import com.projextxy.core.blocks.BlockXy
+import com.projextxy.core.blocks.glow.BlockXyCustom.buildColoredStack
 import com.projextxy.core.blocks.traits.{ColorMultiplier, MachineBlock}
 import com.projextxy.core.client.render.block.RenderCustomGlow
 import com.projextxy.core.tile.TileXyCustomColor
@@ -33,25 +34,13 @@ class BlockXyCustom(blocks: List[BlockXyGlow]) extends BlockXy(Material.rock) wi
 
   override def getSubBlocks(item: Item, tabs: CreativeTabs, list: util.List[_]) = {
     for (i <- blocks.indices) {
-      list.asInstanceOf[util.List[ItemStack]].add(buildColoredStack(i, 255, 255, 255))
+      list.asInstanceOf[util.List[ItemStack]].add(buildColoredStack(this, i, 255, 255, 255))
       for (color <- ProjectXYCoreProxy.rainbowColors) {
-        list.asInstanceOf[util.List[ItemStack]].add(buildColoredStack(i, color.r, color.g, color.b))
+        list.asInstanceOf[util.List[ItemStack]].add(buildColoredStack(this, i, color.r, color.g, color.b))
       }
     }
   }
 
-
-  def buildColoredStack(meta: Int, r: Int, g: Int, b: Int): ItemStack = {
-    val stack = new ItemStack(this, 1, meta)
-    stack.stackTagCompound = new NBTTagCompound
-
-    stack.stackTagCompound.setBoolean("xy.abstractMachine", true)
-    stack.stackTagCompound.setInteger("r", r)
-    stack.stackTagCompound.setInteger("g", g)
-    stack.stackTagCompound.setInteger("b", b)
-
-    stack
-  }
 
   override def colorMultiplier(world: IBlockAccess, x: Int, y: Int, z: Int): Int = {
     blocks(world.getBlockMetadata(x, y, z)) match {
@@ -73,12 +62,26 @@ class BlockXyCustom(blocks: List[BlockXyGlow]) extends BlockXy(Material.rock) wi
     val tile = world.getTileEntity(x, y, z)
 
     tile match {
-      case tileColor: TileXyCustomColor => buildColoredStack(meta, tileColor.r, tileColor.g, tileColor.b)
+      case tileColor: TileXyCustomColor => buildColoredStack(this, meta, tileColor.r, tileColor.g, tileColor.b)
       case _ => super.getPickBlock(target, world, x, y, z, player)
     }
   }
 
   override def damageDropped(meta: Int): Int = meta
+}
+
+object BlockXyCustom {
+  def buildColoredStack(custom: BlockXyCustom, meta: Int, r: Int, g: Int, b: Int): ItemStack = {
+    val stack = new ItemStack(custom, 1, meta)
+    stack.stackTagCompound = new NBTTagCompound
+
+    stack.stackTagCompound.setBoolean("xy.abstractMachine", true)
+    stack.stackTagCompound.setInteger("r", r)
+    stack.stackTagCompound.setInteger("g", g)
+    stack.stackTagCompound.setInteger("b", b)
+
+    stack
+  }
 }
 
 

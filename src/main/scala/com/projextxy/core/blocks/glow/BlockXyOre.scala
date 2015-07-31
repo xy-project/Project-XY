@@ -3,14 +3,13 @@ package com.projextxy.core.blocks.glow
 import java.util
 
 import com.projextxy.core.CoreItems
-import com.projextxy.core.client.render.block.RenderSimpleGlow
 import com.projextxy.core.reference.ModColors
 import net.minecraft.block.material.Material
 import net.minecraft.item.ItemStack
 import net.minecraft.util.MathHelper
 import net.minecraft.world.World
 
-class BlockXyOre extends BlockXyGlow(Material.rock, RenderSimpleGlow.modelId) {
+class BlockXyOre extends BlockXyGlow(Material.rock) {
   val min_drop = 4
   val max_drop = 6
 

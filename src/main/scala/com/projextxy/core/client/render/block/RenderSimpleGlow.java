@@ -20,9 +20,10 @@ import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.world.IBlockAccess;
+import org.lwjgl.opengl.GL11;
 
 public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderingHandler {
-    public static final int modelId = RenderingRegistry.getNextAvailableRenderId();
+    public static final int renderId = RenderingRegistry.getNextAvailableRenderId();
     private static final CCModel baseModel = CCModel.quadModel(24).generateBlock(0, new Cuboid6(new Vector3(0.001, 0.001, 0.001), new Vector3(.999, .999, .999))).apply(new Translation(new Vector3(-.5, -.5, -.5))).computeNormals();
     public static ConnectedRenderBlocks fakeRender = new ConnectedRenderBlocks();
 
@@ -32,7 +33,7 @@ public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderi
 
     @Override
     public int getRenderId() {
-        return modelId;
+        return renderId;
     }
 
     @Override
@@ -42,11 +43,10 @@ public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderi
             new ColourRGBA(blockXyGlow.getColor(metadata) << 8 | 0xFF).glColour();
         }
 
+        renderStandardInvBlock(renderer, block, metadata);
         if (block instanceof TConnectedTextureBlock) {
             final String folder = ((TConnectedTextureBlock) block).connectedFolder();
             renderStandardInvBlockWithTexture(renderer, block, CTRegistry$.MODULE$.getTexture(folder).icons[0]);
-        } else {
-            renderStandardInvBlock(renderer, block, metadata);
         }
 
         CCRenderState.reset();
@@ -59,13 +59,19 @@ public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderi
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
         final Tessellator tess = Tessellator.instance;
+
         BlockXyGlow blockXyGlow = (BlockXyGlow) block;
+
         tess.setBrightness(blockXyGlow.getBrightness(world, x, y, z));
         tess.setColorRGBA_I(blockXyGlow.getColor(world.getBlockMetadata(x, y, z)), 255);
+        renderAllSides(world, x, y, z, block, renderer, BlockXyGlow$.MODULE$.baseIcon(), false);
+
+
         if (block instanceof TConnectedTextureBlock) {
-            //renderer.setRenderBounds(0.001, 0.001, 0.001, .999, .999, .999);
-            renderAllSides(world, x, y, z, block, renderer, BlockXyGlow$.MODULE$.baseIcon(), false);
+            if (((TConnectedTextureBlock) block).renderBlockTexture())
+                renderer.renderStandardBlock(block, x, y, z);
             final String folder = ((TConnectedTextureBlock) block).connectedFolder();
             final IconConnectedTexture texture = CTRegistry$.MODULE$.getTexture(folder);
             getFakeRender().setOverrideBlockTexture(texture);
@@ -76,8 +82,6 @@ public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderi
             getFakeRender().setRenderBoundsFromBlock(block);
             getFakeRender().renderStandardBlock(block, x, y, z);
         } else {
-            renderAllSides(world, x, y, z, block, renderer, BlockXyGlow$.MODULE$.baseIcon(), false);
-            renderer.setRenderBoundsFromBlock(block);
             renderer.renderStandardBlock(block, x, y, z);
         }
         return true;

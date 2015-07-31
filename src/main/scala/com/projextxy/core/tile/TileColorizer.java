@@ -1,5 +1,6 @@
 package com.projextxy.core.tile;
 
+import codechicken.lib.colour.ColourRGBA;
 import codechicken.lib.packet.PacketCustom;
 import com.projextxy.core.CoreBlocks$;
 import com.projextxy.core.ProjectXYCore$;
@@ -166,8 +167,7 @@ public class TileColorizer extends TileAbstractMachine implements ISidedInventor
     public boolean isItemValidForSlot(int slot, ItemStack item) {
         if (item == null)
             return false;
-
-        return slot == OUTPUT_INVENTORY_INDEX ? false : (slot == INPUT_INVENTORY_INDEX ? Block.getBlockFromItem(item.getItem()).equals(CoreBlocks$.MODULE$.blockXyCustom()) : false);
+        return slot != OUTPUT_INVENTORY_INDEX && (slot == INPUT_INVENTORY_INDEX && Block.getBlockFromItem(item.getItem()).equals(CoreBlocks$.MODULE$.blockXyCustom()));
     }
 
     public int getR() {
@@ -232,5 +232,9 @@ public class TileColorizer extends TileAbstractMachine implements ISidedInventor
         packetCustom.writeInt(g);
         packetCustom.writeInt(b);
         return packetCustom;
+    }
+
+    public int getColor() {
+        return new ColourRGBA(r, g, b, 255).rgb();
     }
 }

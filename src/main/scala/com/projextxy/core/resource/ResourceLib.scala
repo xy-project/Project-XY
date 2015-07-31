@@ -7,6 +7,9 @@ import net.minecraft.util.ResourceLocation
 
 object ResourceLib {
   val beamTexture = register("textures/fx/beam.png")
+  val baseGui = register("textures/gui/guiBase.png")
+  val blockSheet = new ResourceAction(new ResourceLocation("textures/atlas/blocks.png"))
+  val itemSheet = new ResourceAction(new ResourceLocation("textures/atlas/items.png"))
 
   def particleSheet: ResourceAction = new ResourceAction(ReflectionHelper.getPrivateValue(classOf[EffectRenderer], null, "particleTextures", "b", "field_110737_b").asInstanceOf[ResourceLocation])
 

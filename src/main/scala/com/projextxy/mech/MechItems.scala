@@ -10,7 +10,7 @@ object MechItems {
   def init() {
     itemXynergyPart = new ItemXynergy
 
-    registerItem(itemXynergyPart)
+    //FIXME: registerItem(itemXynergyPart)
   }
 
   def registerItem(item: Item): Item = {

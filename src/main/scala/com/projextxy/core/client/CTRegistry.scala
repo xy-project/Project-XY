@@ -29,7 +29,6 @@ object CTRegistry extends IIconSelfRegister {
     addConnectedTexture(XY_MACHINE_WHITE_FOLDER)
     addConnectedTexture(XY_STONE_CARVED_FOLDER)
     addConnectedTexture(GLASS_VIEWER_FOLDER)
-    addConnectedTexture(GLASS_VIEWER_FOLDER)
 
     TextureUtils.addIconRegistrar(this)
   }
