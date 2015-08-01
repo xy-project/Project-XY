@@ -1,46 +1,41 @@
 package com.projextxy.core.tile
 
 import codechicken.lib.colour.ColourRGBA
-import codechicken.lib.packet.PacketCustom
-import com.projextxy.core.tile.traits.{TCustomPacketHandler, TMachineTile}
-import com.projextxy.core.{ProjectXYCore, ProjectXyCPH}
+import codechicken.lib.data.{MCDataInput, MCDataOutput}
+import com.projextxy.core.tile.traits.TMachineTile
 import net.minecraft.nbt.NBTTagCompound
-import net.minecraft.network.Packet
 import net.minecraft.tileentity.TileEntity
 
 //TODO: Change to color int instead of individual values to decrease packet size
-class TileXyCustomColor extends TileEntity with TMachineTile with TCustomPacketHandler {
+class TileXyCustomColor extends TileEntity with TMachineTile {
   var r: Int = 255
   var g: Int = 255
   var b: Int = 255
 
   def color: Int = new ColourRGBA(r, g, b, 255).rgb
 
-  override def writeCommon(compound: NBTTagCompound) {
+  override def saveNBT(compound: NBTTagCompound): Unit = {
     compound.setInteger("r", r)
     compound.setInteger("g", g)
     compound.setInteger("b", b)
   }
 
-  override def readCommon(compound: NBTTagCompound) {
-    r = compound.getInteger("r")
-    g = compound.getInteger("g")
-    b = compound.getInteger("b")
-  }
-
-  override def handleClientSidePacket(packet: PacketCustom) {
-    r = packet.readInt()
-    g = packet.readInt()
-    b = packet.readInt()
+  override def receivePacket(in: MCDataInput): Unit = {
+    r = in.readInt()
+    g = in.readInt()
+    b = in.readInt()
     worldObj.func_147479_m(xCoord, yCoord, zCoord)
   }
 
-  override def getDescriptionPacket: Packet = {
-    val packet = new PacketCustom(ProjectXYCore.MOD_ID, ProjectXyCPH.CLIENT_UPDATE_PACKET)
-    packet.writeCoord(xCoord, yCoord, zCoord)
-    packet.writeInt(r)
-    packet.writeInt(g)
-    packet.writeInt(b)
-    packet.toPacket
+  override def writeToPacket(out: MCDataOutput): Unit = {
+    out.writeInt(r)
+    out.writeInt(g)
+    out.writeInt(b)
+  }
+
+  override def readNBT(compound: NBTTagCompound): Unit = {
+    r = compound.getInteger("r")
+    g = compound.getInteger("g")
+    b = compound.getInteger("b")
   }
 }

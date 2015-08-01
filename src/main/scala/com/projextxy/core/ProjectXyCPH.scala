@@ -8,6 +8,7 @@ import net.minecraft.client.multiplayer.WorldClient
 import net.minecraft.network.play.INetHandlerPlayClient
 
 object ProjectXyCPH extends PacketCustom.IClientPacketHandler {
+  val channel = ProjectXYCore.MOD_ID
   val CLIENT_UPDATE_PACKET = 1
 
   override def handlePacket(packetCustom: PacketCustom, minecraft: Minecraft, iNetHandlerPlayClient: INetHandlerPlayClient) {
@@ -24,3 +25,4 @@ object ProjectXyCPH extends PacketCustom.IClientPacketHandler {
     }
   }
 }
+

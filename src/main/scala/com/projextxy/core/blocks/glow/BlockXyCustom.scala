@@ -75,7 +75,7 @@ object BlockXyCustom {
     val stack = new ItemStack(custom, 1, meta)
     stack.stackTagCompound = new NBTTagCompound
 
-    stack.stackTagCompound.setBoolean("xy.abstractMachine", true)
+    stack.stackTagCompound.setBoolean("xy.machine", true)
     stack.stackTagCompound.setInteger("r", r)
     stack.stackTagCompound.setInteger("g", g)
     stack.stackTagCompound.setInteger("b", b)

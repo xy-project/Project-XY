@@ -224,6 +224,7 @@ public class TileColorizer extends TileAbstractMachine implements ISidedInventor
     public PacketCustom buildPacket() {
         PacketCustom packetCustom = new PacketCustom(ProjectXYCore$.MODULE$.MOD_ID(), 1);
         packetCustom.writeCoord(xCoord, yCoord, zCoord);
+
         for (ItemStack stack : inv) {
             packetCustom.writeItemStack(stack);
         }

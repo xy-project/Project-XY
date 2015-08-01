@@ -49,9 +49,9 @@ public class XychoriumlItemRenderer implements IItemRenderer {
                 break;
         }
 
-        ResourceLib.itemSheet().bind();
+        ResourceLib.blockSheet().bind();
         model.setColour(new ColourRGBA(CoreItems.itemXychorium().colors().apply(item.getItemDamage()).rgb << 8 | 0xFF).rgba()).computeNormals().render(transformation, new IconTransformation(ProjectXYCoreProxy.animationFx().texture));
         CCRenderState.draw();
-        ResourceLib.blockSheet().bind();
+        ResourceLib.itemSheet().bind();
     }
 }

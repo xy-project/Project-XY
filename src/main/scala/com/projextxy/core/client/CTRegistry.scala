@@ -14,8 +14,6 @@ import scala.collection.mutable.ArrayBuffer
 object CTRegistry extends IIconSelfRegister {
   val XY_STORAGE_FOLDER = "xyStorage"
   val CLEAN_CONNECTED_FOLDER = "cleanConnected"
-  val XY_MACHINE_FOLDER = "xyMachine"
-  val XY_MACHINE_WHITE_FOLDER = "xyMachineWhite"
   val XY_STONE_CARVED_FOLDER = "xyStoneCarved"
   val GLASS_VIEWER_FOLDER = "glassViewer"
 
@@ -25,8 +23,6 @@ object CTRegistry extends IIconSelfRegister {
   def init(): Unit = {
     addConnectedTexture(XY_STORAGE_FOLDER)
     addConnectedTexture(CLEAN_CONNECTED_FOLDER)
-    addConnectedTexture(XY_MACHINE_FOLDER)
-    addConnectedTexture(XY_MACHINE_WHITE_FOLDER)
     addConnectedTexture(XY_STONE_CARVED_FOLDER)
     addConnectedTexture(GLASS_VIEWER_FOLDER)
 
