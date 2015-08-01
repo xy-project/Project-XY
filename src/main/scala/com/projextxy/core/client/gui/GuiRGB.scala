@@ -6,6 +6,7 @@ import com.projextxy.core.reference.MCColors
 import com.projextxy.core.tile.TileColorizer
 import net.minecraft.client.gui.GuiTextField
 import net.minecraft.entity.player.InventoryPlayer
+import org.lwjgl.opengl.GL11
 
 class GuiRGB(inventory: InventoryPlayer, tile: TileColorizer) extends GuiCommon(new ContainerRGB(inventory, tile)) {
 
@@ -49,7 +50,6 @@ class GuiRGB(inventory: InventoryPlayer, tile: TileColorizer) extends GuiCommon(
         tile.setR(getValueFromText(rText))
         tile.buildPacket().sendToServer()
       }
-
       if (doTextChange(gText)) {
         tile.setG(getValueFromText(gText))
         tile.buildPacket().sendToServer()
@@ -75,9 +75,11 @@ class GuiRGB(inventory: InventoryPlayer, tile: TileColorizer) extends GuiCommon(
 
   override def drawScreen(mouseX: Int, mouseY: Int, par3: Float): Unit = {
     super.drawScreen(mouseX, mouseY, par3)
+    GL11.glDisable(GL11.GL_LIGHTING)
     rText.drawTextBox()
     gText.drawTextBox()
     bText.drawTextBox()
+    GL11.glEnable(GL11.GL_LIGHTING)
   }
 
   override def updateScreen(): Unit = {
