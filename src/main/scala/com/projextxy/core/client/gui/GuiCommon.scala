@@ -45,7 +45,7 @@ abstract class GuiCommon(container: Container) extends GuiContainer(container) {
       new Vector3(x + 2, 8 + y, this.zLevel),
       new Vector3(x + 2 + width, 8 + y, this.zLevel),
       new Vector3(x + 2 + width, 2 + y, this.zLevel),
-      BlockXyGlow.baseIcon, 16.0D)
+      BlockXyGlow.animationIcon, 16.0D)
     CCRenderState.draw()
     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
   }

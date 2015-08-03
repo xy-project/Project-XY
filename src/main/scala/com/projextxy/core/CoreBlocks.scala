@@ -94,16 +94,16 @@ object CoreBlocks {
     registerBlock(blockXychoriumBrickFancy, classOf[ItemBlockMetaHandler])
 
     //Xychorium Bricks - glowing variants
-    registerBlock(blockXyBrick, classOf[ItemBlockColor])
-    registerBlock(blockXyBrickInverted, classOf[ItemBlockColor])
-    registerBlock(blockXyBrickInvertedWhite, classOf[ItemBlockColor])
-    registerBlock(blockXyBrickFancy, classOf[ItemBlockColor])
-    registerBlock(blockXyBrickFancyInverted, classOf[ItemBlockColor])
-    registerBlock(blockXyBrickFancyInvertedWhite, classOf[ItemBlockColor])
+    registerBlock(blockXyBrick, classOf[ItemBlockMetaHandler])
+    registerBlock(blockXyBrickInverted, classOf[ItemBlockMetaHandler])
+    registerBlock(blockXyBrickInvertedWhite, classOf[ItemBlockMetaHandler])
+    registerBlock(blockXyBrickFancy, classOf[ItemBlockMetaHandler])
+    registerBlock(blockXyBrickFancyInverted, classOf[ItemBlockMetaHandler])
+    registerBlock(blockXyBrickFancyInvertedWhite, classOf[ItemBlockMetaHandler])
 
     //Machine Blocks
-    registerBlock(blockXyMachineBlock, classOf[ItemBlockColor])
-    registerBlock(blockXyMachineBlockWhite, classOf[ItemBlockColor])
+    registerBlock(blockXyMachineBlock, classOf[ItemBlockMetaHandler])
+    registerBlock(blockXyMachineBlockWhite, classOf[ItemBlockMetaHandler])
 
     //Custom variants
     registerBlock(blockXyCustom, classOf[ItemBLockColorContainer])

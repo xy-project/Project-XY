@@ -101,7 +101,7 @@ public class TileColorizer extends TileAbstractMachine implements ISidedInventor
     public ItemStack createOutputFromInput(ItemStack input) {
         ItemStack output = new ItemStack(CoreBlocks$.MODULE$.blockXyCustom(), input.stackSize, input.getItemDamage());
         output.stackTagCompound = new NBTTagCompound();
-        output.stackTagCompound.setBoolean("xy.abstractMachine", true);
+        output.stackTagCompound.setBoolean("xy.machine", true);
         output.stackTagCompound.setInteger("r", r);
         output.stackTagCompound.setInteger("g", g);
         output.stackTagCompound.setInteger("b", b);

@@ -10,15 +10,15 @@ import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.util.IIcon
 
 class BlockXyStone extends BlockXy(Material.rock) {
-  val icons = Array.fill[IIcon](3)(null)
+  val icons = Array.fill[IIcon](4)(null)
   setBlockName("blockXyStone")
 
   override def registerBlockIcons(reg: IIconRegister): Unit = {
-    icons(0) = reg.registerIcon(s"${ProjectXYCore.MOD_ID}:blockXyStone")
-    icons(1) = reg.registerIcon(s"${ProjectXYCore.MOD_ID}:blockXyStoneBrick")
-    icons(2) = reg.registerIcon(s"${ProjectXYCore.MOD_ID}:blockXyStoneBrickFancy")
+    icons(0) = reg.registerIcon(s"${ProjectXYCore.MOD_ID}:blockAluminum")
+    icons(1) = reg.registerIcon(s"${ProjectXYCore.MOD_ID}:blockXyStone")
+    icons(2) = reg.registerIcon(s"${ProjectXYCore.MOD_ID}:blockXyStoneBrick")
+    icons(3) = reg.registerIcon(s"${ProjectXYCore.MOD_ID}:blockXyStoneBrickFancy")
   }
-
 
   override def getSubBlocks(item: Item, tab: CreativeTabs, _list: util.List[_]): Unit = {
     val list = _list.asInstanceOf[util.List[ItemStack]]

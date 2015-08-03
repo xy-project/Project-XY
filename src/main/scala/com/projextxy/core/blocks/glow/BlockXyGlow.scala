@@ -44,10 +44,12 @@ class BlockXyGlow(mat: Material) extends BlockXy(mat) {
   def getBrightness(world: IBlockAccess, x: Int, y: Int, z: Int): Int = 220
 
   def getBrightness(meta: Int): Int = 220
+  
+  def getAnimationIcon():IIcon = BlockXyGlow.animationIcon
 }
 
 object BlockXyGlow {
-  def baseIcon: IIcon = ProjectXYCoreProxy.animationFx.texture
+  def animationIcon: IIcon = ProjectXYCoreProxy.animationFx.texture
 
   def apply: BlockXyGlow = new BlockXyGlow(Material.rock)
 

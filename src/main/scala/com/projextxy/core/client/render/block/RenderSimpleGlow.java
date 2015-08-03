@@ -53,21 +53,18 @@ public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderi
         CCRenderState.useNormals = true;
         CCRenderState.startDrawing();
         CCRenderState.setBrightness(blockXyGlow.getBrightness(metadata));
-        baseModel.setColour(new ColourRGBA(blockXyGlow.getColor(metadata) << 8 | 0xFF).rgba()).render(new IconTransformation(BlockXyGlow$.MODULE$.baseIcon()));
+        baseModel.setColour(new ColourRGBA(blockXyGlow.getColor(metadata) << 8 | 0xFF).rgba()).render(new IconTransformation(BlockXyGlow$.MODULE$.animationIcon()));
         CCRenderState.draw();
     }
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
-        GL11.glEnable(GL11.GL_DEPTH_TEST);
         final Tessellator tess = Tessellator.instance;
-
         BlockXyGlow blockXyGlow = (BlockXyGlow) block;
 
         tess.setBrightness(blockXyGlow.getBrightness(world, x, y, z));
         tess.setColorRGBA_I(blockXyGlow.getColor(world.getBlockMetadata(x, y, z)), 255);
-        renderAllSides(world, x, y, z, block, renderer, BlockXyGlow$.MODULE$.baseIcon(), false);
-
+        renderAllSides(world, x, y, z, block, renderer, blockXyGlow.getAnimationIcon(), false);
 
         if (block instanceof TConnectedTextureBlock) {
             if (((TConnectedTextureBlock) block).renderBlockTexture())

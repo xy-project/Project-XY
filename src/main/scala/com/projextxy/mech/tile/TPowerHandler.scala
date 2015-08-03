@@ -1,4 +1,4 @@
-package com.projextxy.mech.tiles
+package com.projextxy.mech.tile
 
 import cofh.api.energy.{EnergyStorage, IEnergyProvider, IEnergyReceiver}
 import com.projextxy.core.tile.traits.TMachineTile

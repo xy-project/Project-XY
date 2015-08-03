@@ -14,14 +14,14 @@ trait TMachineTile extends TileEntity with TCustomPacketHandler {
     if (stack == null) return
     if (stack.stackTagCompound == null) stack.stackTagCompound = new NBTTagCompound
     val root: NBTTagCompound = stack.stackTagCompound
-    root.setBoolean("xy.abstractMachine", true)
+    root.setBoolean("xy.machine", true)
     saveNBT(root)
   }
 
   def readFromItemStack(stack: ItemStack) {
     if (stack == null || stack.stackTagCompound == null) return
     val root: NBTTagCompound = stack.stackTagCompound
-    if (!root.hasKey("xy.abstractMachine")) return
+    if (!root.hasKey("xy.machine")) return
     readNBT(root)
   }
 
@@ -39,8 +39,7 @@ trait TMachineTile extends TileEntity with TCustomPacketHandler {
   }
 
   override def writeToNBT(nbt: NBTTagCompound) {
-    readNBT(nbt)
-
+    saveNBT(nbt)
     super.writeToNBT(nbt)
   }
 

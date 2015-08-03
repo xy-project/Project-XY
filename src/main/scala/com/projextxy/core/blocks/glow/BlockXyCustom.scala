@@ -36,7 +36,7 @@ class BlockXyCustom(blocks: List[BlockXyGlow]) extends BlockXy(Material.rock) wi
     for (i <- blocks.indices) {
       list.asInstanceOf[util.List[ItemStack]].add(buildColoredStack(this, i, 255, 255, 255))
       for (color <- ProjectXYCoreProxy.rainbowColors) {
-        list.asInstanceOf[util.List[ItemStack]].add(buildColoredStack(this, i, color.r, color.g, color.b))
+        list.asInstanceOf[util.List[ItemStack]].add(buildColoredStack(this, i, color._1, color._2, color._3))
       }
     }
   }

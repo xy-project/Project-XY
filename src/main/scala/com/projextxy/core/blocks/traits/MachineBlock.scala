@@ -25,9 +25,7 @@ trait MachineBlock extends Block with ITileEntityProvider {
     if (!customDrops)
       return super.getDrops(world, x, y, z, metadata, fortune)
 
-    val tile = world.getTileEntity(x, y, z)
-
-    tile match {
+    world.getTileEntity(x, y, z) match {
       case machine: TMachineTile =>
         val stack = new ItemStack(this, 1, metadata)
         machine.writeToItemStack(stack)
