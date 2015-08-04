@@ -1,8 +1,8 @@
 package com.projextxy.mech
 
-import com.projextxy.core.ProjectXYCore
-import com.projextxy.core.tile.TileXyCustomColor
+import com.projextxy.mech.client.TileFabricatorRenderer
 import com.projextxy.mech.tile.TileFabricator
+import cpw.mods.fml.client.registry.ClientRegistry
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
 import cpw.mods.fml.common.registry.GameRegistry
 import cpw.mods.fml.relauncher.{Side, SideOnly}
@@ -29,6 +29,7 @@ class ClientProxy extends CommonProxy {
 
   @SideOnly(Side.CLIENT)
   override def init(event: FMLInitializationEvent) {
+    ClientRegistry.bindTileEntitySpecialRenderer(classOf[TileFabricator], new TileFabricatorRenderer)
     super.init(event)
   }
 

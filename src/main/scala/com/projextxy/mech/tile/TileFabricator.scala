@@ -14,7 +14,17 @@ import scala.collection.JavaConversions._
 import scala.util.control.Breaks._
 
 class TileFabricator extends TMachineTile with ISidedInventory {
+  val INVENTORY_SIZE = 19
+  val OUTPUT_SLOT_INDEX = 9
+  val CRAFTING_INVENTORY_RANGE = 0 until 9
+  val inv = Array.fill[ItemStack](INVENTORY_SIZE)(null)
   var currentRecipe: IRecipe = null
+  var mode = 0
+  var powered = false
+  var prevPowered = false
+  var crafting_render_time = 0
+  //Inventory
+  var inv_changed = false
 
   //Standard TileEntity stuff
   override def validate(): Unit = {
@@ -23,18 +33,33 @@ class TileFabricator extends TMachineTile with ISidedInventory {
   }
 
   override def updateEntity(): Unit = {
+    if (crafting_render_time > 0)
+      crafting_render_time -= 1
+    prevPowered = powered
+    powered = worldObj.isBlockIndirectlyGettingPowered(xCoord, yCoord, zCoord)
+    if (powered != prevPowered)
+      worldObj.markBlockForUpdate(xCoord, yCoord, zCoord)
     if (!worldObj.isRemote) {
       if (inv_changed) {
         inv_changed = false
         loadRecipe()
       }
-      craft()
+      if (shouldCraft())
+        craft()
     } else {
     }
   }
 
+  def shouldCraft(): Boolean = {
+    mode match {
+      case 0 => !powered
+      case 1 => powered
+      case 2 => powered && !prevPowered
+    }
+  }
+
   def craft(result: ItemStack, items: Array[RecipeInvStack], crafting: InventoryCrafting): Unit = {
-    for (i <- 0 until 9) {
+    for (i <- CRAFTING_INVENTORY_RANGE) {
       val stack = crafting.getStackInSlot(i)
       if (stack != null) {
         crafting.decrStackSize(i, 1)
@@ -51,7 +76,6 @@ class TileFabricator extends TMachineTile with ISidedInventory {
     }
   }
 
-
   def updateInventories(items: Array[RecipeInvStack], result: ItemStack, crafting: InventoryCrafting): Unit = {
     for (invstack <- items) {
       if (invstack != null) {
@@ -63,7 +87,7 @@ class TileFabricator extends TMachineTile with ISidedInventory {
           invstack.access.inv.setInventorySlotContents(invstack.slot, stack)
       }
     }
-    for (i <- 0 until 9) {
+    for (i <- CRAFTING_INVENTORY_RANGE) {
       val stack = items(i)
       val container = crafting.getStackInSlot(i)
       if (container != null && stack != null)
@@ -85,10 +109,14 @@ class TileFabricator extends TMachineTile with ISidedInventory {
     if (!shouldMergeStacks(items, crafting, result))
       return
     updateInventories(items, result, crafting)
+    if (crafting_render_time <= 1) {
+      crafting_render_time = 20
+      worldObj.markBlockForUpdate(xCoord, yCoord, zCoord)
+    }
   }
 
   def shouldMergeStacks(items: Array[RecipeInvStack], crafting: InventoryCrafting, out: ItemStack): Boolean = {
-    for (i <- 0 until 9) {
+    for (i <- CRAFTING_INVENTORY_RANGE) {
       val stack = items(i)
       val container = crafting.getStackInSlot(i)
       if (stack != null && container != null && InventoryUtils.insertItem(stack.access, container, true) > 0)
@@ -99,9 +127,8 @@ class TileFabricator extends TMachineTile with ISidedInventory {
     true
   }
 
-
   def replaceCurrentCrafingRecipe(inventoryCrafting: InventoryCrafting, stacks: Array[RecipeInvStack]): Unit = {
-    for (i <- 0 until 9)
+    for (i <- CRAFTING_INVENTORY_RANGE)
       if (stacks(i) != null)
         inventoryCrafting.setInventorySlotContents(i, InventoryUtils.copyStack(stacks(i).stack, 1))
   }
@@ -109,7 +136,7 @@ class TileFabricator extends TMachineTile with ISidedInventory {
   def findRecipeItems(ingredients: InventoryCrafting, out: ItemStack): Array[RecipeInvStack] = {
     val items = Array.fill[RecipeInvStack](9)(null)
     val foundItems = Array.fill[Boolean](9)(false)
-    for (i <- 0 until 9)
+    for (i <- CRAFTING_INVENTORY_RANGE)
       foundItems(i) = ingredients.getStackInSlot(i) == null
     findRecipeItems(items, foundItems, new InventoryRange(this, 0), ingredients, out)
     for (side <- ForgeDirection.VALID_DIRECTIONS) {
@@ -119,7 +146,7 @@ class TileFabricator extends TMachineTile with ISidedInventory {
         findRecipeItems(items, foundItems, access, ingredients, out)
       }
     }
-    for (i <- 0 until 9)
+    for (i <- CRAFTING_INVENTORY_RANGE)
       if (!foundItems(i))
         return null
     items
@@ -137,12 +164,12 @@ class TileFabricator extends TMachineTile with ISidedInventory {
   }
 
   def findRecipeItems(items: Array[RecipeInvStack], foundItems: Array[Boolean], access: InventoryRange, ingredients: InventoryCrafting, out: ItemStack): Unit = {
-    for (slot <- 0 until access.lastSlot()) {
+    for (slot <- 0 to access.lastSlot()) {
       var stack = InventoryUtils.getExtractableStack(access.inv, slot)
       if (stack != null && stack.stackSize >= 1) {
         stack = stack.copy
         breakable {
-          for (islot <- 0 until 9) {
+          for (islot <- CRAFTING_INVENTORY_RANGE) {
             if (!foundItems(islot)) {
               if (testCraft(ingredients, out, stack, islot)) {
                 items(islot) = new RecipeInvStack(access, slot)
@@ -159,6 +186,7 @@ class TileFabricator extends TMachineTile with ISidedInventory {
   }
 
   def loadRecipe(): Unit = {
+    currentRecipe = null
     val crafted = getCrafted()
     val list = CraftingManager.getInstance().getRecipeList.asInstanceOf[java.util.List[IRecipe]]
     val recipe = list.filter(p => p.matches(crafted, worldObj))
@@ -178,23 +206,30 @@ class TileFabricator extends TMachineTile with ISidedInventory {
 
   //Packets and NBT saving
   override def saveNBT(compound: NBTTagCompound): Unit = {
+    compound.setInteger("mode", mode)
     compound.setTag("items", InventoryUtils.writeItemStacksToTag(inv))
   }
 
-  override def receivePacket(in: MCDataInput): Unit = {}
-
-  override def writeToPacket(out: MCDataOutput): Unit = {}
-
-  override def readNBT(compound: NBTTagCompound): Unit = {
-    InventoryUtils.readItemStacksFromTag(inv, compound.getTagList("items", 10))
+  override def receivePacket(in: MCDataInput): Unit = {
+    mode = in.readInt()
+    crafting_render_time = in.readInt()
+    for (i <- CRAFTING_INVENTORY_RANGE)
+      inv(i) = in.readItemStack()
   }
 
-  //Inventory
-  var inv_changed = false
-  val INVENTORY_SIZE = 19
-  val OUTPUT_SLOT_INDEX = 9
-  val CRAFTING_INVENTORY_RANGE = 0 until 9
-  val inv = Array.fill[ItemStack](INVENTORY_SIZE)(null)
+  override def writeToPacket(out: MCDataOutput): Unit = {
+    out.writeInt(mode)
+    out.writeInt(crafting_render_time)
+    for (i <- CRAFTING_INVENTORY_RANGE)
+      out.writeItemStack(getStackInSlot(i))
+  }
+
+  override def getStackInSlot(slot: Int): ItemStack = inv(slot)
+
+  override def readNBT(compound: NBTTagCompound): Unit = {
+    mode = compound.getInteger("mode")
+    InventoryUtils.readItemStacksFromTag(inv, compound.getTagList("items", 10))
+  }
 
   override def decrStackSize(slotIndex: Int, amt: Int): ItemStack = InventoryUtils.decrStackSize(this, slotIndex, amt)
 
@@ -215,25 +250,23 @@ class TileFabricator extends TMachineTile with ISidedInventory {
     onInventoryChanged()
   }
 
-  private def onInventoryChanged() = inv_changed = true
-
   override def isUseableByPlayer(player: EntityPlayer): Boolean = true
-
-  override def getStackInSlot(slot: Int): ItemStack = inv(slot)
 
   override def hasCustomInventoryName: Boolean = true
 
   override def getInventoryName: String = "container.Fabricator"
 
-  override def canExtractItem(slotIndex: Int, stack: ItemStack, side: Int): Boolean = if (slotIndex < 10) false else true
+  override def canExtractItem(slotIndex: Int, stack: ItemStack, side: Int): Boolean = if (slotIndex >= 10) true else false
 
   override def canInsertItem(slotIndex: Int, stack: ItemStack, side: Int): Boolean = if (slotIndex >= 10) true else false
 
-  override def getAccessibleSlotsFromSide(side: Int): Array[Int] = (10 until INVENTORY_SIZE).toArray
+  override def getAccessibleSlotsFromSide(side: Int): Array[Int] = if (side == 1) Array.empty[Int] else (10 until INVENTORY_SIZE).toArray
+
+  private def onInventoryChanged() = inv_changed = true
 }
 
 class FabricatorCraftingInventory extends Container {
-  override def canInteractWith(p_75145_1_ : EntityPlayer): Boolean = true
+  override def canInteractWith(player: EntityPlayer): Boolean = true
 }
 
 case class RecipeInvStack(access: InventoryRange, slot: Int) {

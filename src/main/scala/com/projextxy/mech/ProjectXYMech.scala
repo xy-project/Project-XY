@@ -5,7 +5,7 @@ import cpw.mods.fml.common.Mod
 import cpw.mods.fml.common.Mod.EventHandler
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
 
-@Mod(modid = "ProjectXYMech", name = "Project XY - Mech", modLanguage = "scala", dependencies = "required-after:ProjectXY;required-after:ForgeMultipart")
+@Mod(modid = "ProjectXYMech", name = "Project XY - Mech", modLanguage = "scala", dependencies = "required-after:ProjectXY;required-after:ForgeMultipart;required-after:CodeChickenCore;")
 object ProjectXYMech {
   val MOD_ID = "ProjectXYMech"
 

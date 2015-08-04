@@ -22,7 +22,7 @@ object CoreItems {
 
     registerItem(itemXychorium)
     registerItem(itemXychoridite)
-    registerItem(itemXyColorMatrixUpgrade)
+    //registerItem(itemXyColorMatrixUpgrade)
   }
 
   def registerItem(item: Item): Item = {

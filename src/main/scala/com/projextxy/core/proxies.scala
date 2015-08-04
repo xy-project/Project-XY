@@ -1,6 +1,5 @@
 package com.projextxy.core
 
-import codechicken.lib.colour.ColourRGBA
 import codechicken.lib.packet.PacketCustom
 import com.projextxy.core.client.render.block.{RenderConnectedTexture, RenderCustomGlow, RenderSimpleGlow}
 import com.projextxy.core.client.render.item.{RenderXyCustomItemBlock, XychoriumlItemRenderer}
@@ -28,7 +27,7 @@ class CommonProxy {
   }
 
   def init(event: FMLInitializationEvent) {
-    PacketCustom.assignHandler(ProjectXYCore.MOD_ID, new ServerPacketHandler)
+    PacketCustom.assignHandler(ProjectXYCore.MOD_ID, ProjectXySPH)
     GameRegistry.registerWorldGenerator(new WorldGeneratorManager, 0)
     RecipeHandler.init()
   }
