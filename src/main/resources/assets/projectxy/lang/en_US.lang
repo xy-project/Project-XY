@@ -76,3 +76,14 @@ tile.blockXyBasicMachine|2.name=Xychorium Ice
 tile.blockXyBasicMachine|3.name=Xychorium Soil
 tile.blockFabricator.name=Fabricator
 
+item.itemXychorium|0.name=Red Xychorium
+item.itemXychorium|1.name=Green Xychorium
+item.itemXychorium|2.name=Blue Xychorium
+item.itemXychorium|3.name=Light Xychorium
+item.itemXychorium|4.name=Dark Xychorium
+
+item.itemXychoridite|0.name=Red Xychoridite
+item.itemXychoridite|1.name=Green Xychoridite
+item.itemXychoridite|2.name=Blue Xychoridite
+item.itemXychoridite|3.name=Light Xychoridite
+item.itemXychoridite|4.name=Dark Xychoridite
