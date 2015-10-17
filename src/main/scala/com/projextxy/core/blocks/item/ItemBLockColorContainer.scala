@@ -7,7 +7,7 @@ import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.item.{ItemBlock, ItemStack}
 import net.minecraft.util.EnumChatFormatting
 
-class ItemBLockColorContainer(block: Block) extends ItemBlock(block) {
+class ItemBlockColorContainer(block: Block) extends ItemBlock(block) {
   setHasSubtypes(true)
   setMaxDamage(0)
 

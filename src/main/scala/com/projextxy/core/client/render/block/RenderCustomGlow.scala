@@ -1,7 +1,7 @@
 package com.projextxy.core.client.render.block
 
 import com.projextxy.core.CoreBlocks
-import com.projextxy.core.blocks.glow.{BlockXyCustom, BlockXyGlow}
+import com.projextxy.core.blocks.glow.{TBlockXyGlow, BlockXyCustom}
 import com.projextxy.core.blocks.traits.TConnectedTextureBlock
 import com.projextxy.core.client.CTRegistry
 import com.projextxy.core.client.render.block.RenderCustomGlow.fakeRenderer
@@ -29,7 +29,7 @@ class RenderCustomGlow extends RenderBlock with ISimpleBlockRenderingHandler {
         val meta = world.getBlockMetadata(x, y, z)
         tess.setBrightness(220)
         tess.setColorRGBA_I(tileCustom.color, 255)
-        RenderBlock.renderAllSides(world, x, y, z, _block, renderer, block.sub_blocks(meta).getAnimationIcon(), false)
+        RenderBlock.renderAllSides(world, x, y, z, _block, renderer, block.sub_blocks(meta).getAnimationIcon, false)
 
         block.sub_blocks(meta) match {
           case connectedBlock: TConnectedTextureBlock =>
@@ -42,7 +42,6 @@ class RenderCustomGlow extends RenderBlock with ISimpleBlockRenderingHandler {
             fakeRenderer.curBlock = _block
             fakeRenderer.changeBounds = true
             fakeRenderer.curMeta = world.getBlockMetadata(x, y, z)
-            fakeRenderer.setRenderBoundsFromBlock(_block)
             GL11.glEnable(GL11.GL_BLEND)
             return fakeRenderer.renderStandardBlock(_block, x, y, z)
           case _ =>
@@ -53,7 +52,7 @@ class RenderCustomGlow extends RenderBlock with ISimpleBlockRenderingHandler {
       case colorizer: TileColorizer =>
         tess.setBrightness(220)
         tess.setColorRGBA_I(colorizer.getColor, 255)
-        RenderBlock.renderAllSides(world, x, y, z, _block, renderer, BlockXyGlow.animationIcon, false)
+        RenderBlock.renderAllSides(world, x, y, z, _block, renderer, TBlockXyGlow.animationIcon, false)
         renderer.renderStandardBlock(_block, x, y, z);
     }
   }
@@ -61,5 +60,5 @@ class RenderCustomGlow extends RenderBlock with ISimpleBlockRenderingHandler {
 
 object RenderCustomGlow {
   val renderId = RenderingRegistry.getNextAvailableRenderId
-  val fakeRenderer = new ConnectedRenderBlocks()
+  lazy val fakeRenderer = new ConnectedRenderBlocks()
 }

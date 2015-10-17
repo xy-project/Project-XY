@@ -4,7 +4,7 @@ import codechicken.lib.colour.ColourRGBA
 import codechicken.lib.vec.Vector3
 import com.projextxy.core.ProjectXYCoreProxy
 import com.projextxy.core.blocks.glow.{BlockXyColorizer, BlockXyCustom}
-import com.projextxy.core.blocks.traits.{ColorMultiplier, TConnectedTextureBlock}
+import com.projextxy.core.blocks.traits.{TColorBlock, TConnectedTextureBlock}
 import com.projextxy.core.client.render.block.RenderBlock
 import com.projextxy.core.client.{CTRegistry, RenderTickHandler}
 import com.projextxy.lib.cofh.RenderHelper
@@ -50,7 +50,7 @@ class RenderXyCustomItemBlock extends IItemRenderer {
       Block.getBlockFromItem(item.getItem) match {
         case colorMult: BlockXyCustom =>
           colorMult.sub_blocks(item.getItemDamage) match {
-            case colorMultiplier: ColorMultiplier => new ColourRGBA(r, g, b, 255).rgb()
+            case colorMultiplier: TColorBlock => if(colorMultiplier.hasColorMultiplier) new ColourRGBA(r, g, b, 255).rgb() else new ColourRGBA(255, 255, 255, 255).rgb()
             case _ => new ColourRGBA(255, 255, 255, 255).rgb()
           }
         case _ => new ColourRGBA(255, 255, 255, 255).rgb()
@@ -64,7 +64,6 @@ class RenderXyCustomItemBlock extends IItemRenderer {
     GL11.glEnable(GL11.GL_BLEND)
     GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA)
     RenderHelper.renderTextureAsBlock(data(0).asInstanceOf[RenderBlocks], ProjectXYCoreProxy.animationFx.texture, offset, offset, offset, new ColourRGBA(r, g, b, 255).rgb())
-
 
     Block.getBlockFromItem(item.getItem) match {
       case colorMult: BlockXyCustom =>

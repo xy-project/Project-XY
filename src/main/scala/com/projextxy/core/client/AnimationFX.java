@@ -52,7 +52,7 @@ public class AnimationFX extends TextureFX {
                 this.alpha[(i + j * this.tileSizeBase)] -= 0.052F;
 
                 if (Math.random() < 0.0055D) {
-                    this.alpha[(i + j * this.tileSizeBase)] = 1.33F;
+                    this.alpha[(i + j * this.tileSizeBase)] = 1.25F;
                 }
             }
         }

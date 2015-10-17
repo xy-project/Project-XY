@@ -4,6 +4,8 @@ import java.util
 
 import com.projextxy.core.client.CTRegistry
 import com.projextxy.core.client.render.block.RenderConnectedTexture
+import com.projextxy.mech.multiblock.BlockMultiShadow
+import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.creativetab.CreativeTabs
@@ -30,11 +32,18 @@ case class BlockXyDecor(textureFolders: List[String], mat: Material, isGlass: Bo
 
   override def getRenderBlockPass: Int = if (isGlass) 1 else 0
 
-  override def shouldSideBeRendered(world: IBlockAccess, x: Int, y: Int, z: Int, side: Int): Boolean = if (world.getBlock(x, y, z) == this) false else super.shouldSideBeRendered(world, x, y, z, side)
+  override def shouldSideBeRendered(world: IBlockAccess, x: Int, y: Int, z: Int, side: Int): Boolean = {
+    if (isGlass) {
+      if (world.getBlock(x, y, z).getMaterial == Material.air) return true
+      if (world.getBlock(x, y, z) == this || world.getBlock(x, y, z).isInstanceOf[BlockMultiShadow])
+        return false
+    }
+    super.shouldSideBeRendered(world, x, y, z, side)
+  }
 
-  override def isBlockNormalCube: Boolean = !isGlass
+  override def isBlockNormalCube: Boolean = super.isBlockNormalCube
 
-  override def renderAsNormalBlock(): Boolean = false
+  override def renderAsNormalBlock(): Boolean = true
 
   override def canPlaceTorchOnTop(world: World, x: Int, y: Int, z: Int): Boolean = !isGlass
 }

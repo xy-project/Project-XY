@@ -7,9 +7,8 @@ import codechicken.lib.render.uv.IconTransformation;
 import codechicken.lib.vec.Cuboid6;
 import codechicken.lib.vec.Translation;
 import codechicken.lib.vec.Vector3;
-import com.projextxy.core.blocks.glow.BlockXyGlow;
-import com.projextxy.core.blocks.glow.BlockXyGlow$;
-import com.projextxy.core.blocks.traits.ColorMultiplier;
+import com.projextxy.core.blocks.glow.TBlockXyGlow;
+import com.projextxy.core.blocks.glow.TBlockXyGlow$;
 import com.projextxy.core.blocks.traits.TConnectedTextureBlock;
 import com.projextxy.core.client.CTRegistry$;
 import com.projextxy.core.client.render.connected.ConnectedRenderBlocks;
@@ -25,9 +24,11 @@ import org.lwjgl.opengl.GL11;
 public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderingHandler {
     public static final int renderId = RenderingRegistry.getNextAvailableRenderId();
     private static final CCModel baseModel = CCModel.quadModel(24).generateBlock(0, new Cuboid6(new Vector3(0.001, 0.001, 0.001), new Vector3(.999, .999, .999))).apply(new Translation(new Vector3(-.5, -.5, -.5))).computeNormals();
-    public static ConnectedRenderBlocks fakeRender = new ConnectedRenderBlocks();
+    public static ConnectedRenderBlocks fakeRender;
 
     public ConnectedRenderBlocks getFakeRender() {
+        if(fakeRender == null)
+            fakeRender = new ConnectedRenderBlocks();
         return fakeRender;
     }
 
@@ -38,8 +39,8 @@ public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderi
 
     @Override
     public void renderInventoryBlock(Block block, int metadata, int modelID, RenderBlocks renderer) {
-        BlockXyGlow blockXyGlow = (BlockXyGlow) block;
-        if (block instanceof ColorMultiplier) {
+        TBlockXyGlow blockXyGlow = (TBlockXyGlow) block;
+        if (blockXyGlow.hasColorMultiplier()) {
             new ColourRGBA(blockXyGlow.getColor(metadata) << 8 | 0xFF).glColour();
         }
 
@@ -48,19 +49,20 @@ public class RenderSimpleGlow extends RenderBlock implements ISimpleBlockRenderi
             final String folder = ((TConnectedTextureBlock) block).connectedFolder();
             renderStandardInvBlockWithTexture(renderer, block, CTRegistry$.MODULE$.getTexture(folder).icons[0]);
         }
-
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
         CCRenderState.reset();
         CCRenderState.useNormals = true;
         CCRenderState.startDrawing();
         CCRenderState.setBrightness(blockXyGlow.getBrightness(metadata));
-        baseModel.setColour(new ColourRGBA(blockXyGlow.getColor(metadata) << 8 | 0xFF).rgba()).render(new IconTransformation(BlockXyGlow$.MODULE$.animationIcon()));
+        baseModel.setColour(new ColourRGBA(blockXyGlow.getColor(metadata) << 8 | 0xFF).rgba()).render(new IconTransformation(TBlockXyGlow$.MODULE$.animationIcon()));
         CCRenderState.draw();
+        GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
     }
 
     @Override
     public boolean renderWorldBlock(IBlockAccess world, int x, int y, int z, Block block, int modelId, RenderBlocks renderer) {
         final Tessellator tess = Tessellator.instance;
-        BlockXyGlow blockXyGlow = (BlockXyGlow) block;
+        TBlockXyGlow blockXyGlow = (TBlockXyGlow) block;
 
         tess.setBrightness(blockXyGlow.getBrightness(world, x, y, z));
         tess.setColorRGBA_I(blockXyGlow.getColor(world.getBlockMetadata(x, y, z)), 255);

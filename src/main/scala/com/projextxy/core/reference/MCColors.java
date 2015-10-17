@@ -16,11 +16,11 @@ public enum MCColors {
     LIGHT_GREY(0x939393, 8),
     CYAN(0x008787, 9),
     PURPLE(0x5E00C0, 10),
-    BLUE(0x1e40ff, 11),
+    BLUE(0x0064FF, 11),
     BROWN(0x8B4513, 12),
-    GREEN(0x009F00, 13),
+    GREEN(0x8000, 13),
     RED(0xA20F06, 14),
-    BLACK(0x272727, 15);
+    BLACK(0x2C2C2C, 15);
 
     public static final MCColors[] VALID_COLORS = values();
     private static final String[] dyeDictionary = {"dyeBlack", "dyeRed", "dyeGreen", "dyeBrown", "dyeBlue", "dyePurple", "dyeCyan", "dyeLightGray", "dyeGray", "dyePink", "dyeLime", "dyeYellow",

@@ -1,14 +1,12 @@
 package com.projextxy.core
 
 import java.lang.{Character => JChar}
-
 import com.projextxy.core.blocks.glow.BlockXyGlow
 import com.projextxy.core.item.TColoredItem
 import com.projextxy.core.reference.{MCColors, ModColors}
 import cpw.mods.fml.common.registry.GameRegistry
 import net.minecraft.init.Blocks
 import net.minecraft.item.ItemStack
-import net.minecraftforge.oredict.ShapedOreRecipe
 
 object RecipeHandler {
   def init(): Unit = {

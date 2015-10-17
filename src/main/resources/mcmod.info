@@ -1,10 +1,10 @@
 [
 {
-  "modid": "projectxy",
+  "modid": "ProjectXY",
   "name": "Projext XY",
   "description": "",
   "version": "${version}",
-  "mcversion": "${mcversion}",
+  "mcversion": "${mc_version}",
   "url": "",
   "updateUrl": "",
   "authors": ["Projext XY"],
