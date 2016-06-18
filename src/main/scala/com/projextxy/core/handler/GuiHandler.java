@@ -4,7 +4,11 @@ import com.projextxy.core.client.gui.GuiRGB;
 import com.projextxy.core.inventory.ContainerRGB;
 import com.projextxy.core.tile.TileColorizer;
 import com.projextxy.mech.gui.ContainerFabricator;
+import com.projextxy.mech.gui.ContainerMultitank;
 import com.projextxy.mech.gui.GuiFabricator;
+import com.projextxy.mech.gui.GuiMultiTank;
+import com.projextxy.mech.multiblock.MultiTank;
+import com.projextxy.mech.multiblock.TileMultiBlock;
 import com.projextxy.mech.tile.TileFabricator;
 import cpw.mods.fml.common.network.IGuiHandler;
 import net.minecraft.entity.player.EntityPlayer;
@@ -20,6 +24,9 @@ public class GuiHandler implements IGuiHandler {
             case FABRICATOR:
                 TileFabricator tileFabricator = (TileFabricator) world.getTileEntity(x, y, z);
                 return new ContainerFabricator(player.inventory, tileFabricator);
+            case TANK:
+                TileMultiBlock tile = (TileMultiBlock) world.getTileEntity(x, y, z);
+                return new ContainerMultitank(player.inventory, (MultiTank) tile.getTank(0).get());
         }
         return null;
     }
@@ -33,12 +40,15 @@ public class GuiHandler implements IGuiHandler {
             case FABRICATOR:
                 TileFabricator tileFabricator = (TileFabricator) world.getTileEntity(x, y, z);
                 return new GuiFabricator(player.inventory, tileFabricator);
+            case TANK:
+                TileMultiBlock tile = (TileMultiBlock) world.getTileEntity(x, y, z);
+                return new GuiMultiTank(player.inventory, (MultiTank) tile.getTank(0).get());
         }
         return null;
     }
 
     public enum GuiIds {
-        RGB, FABRICATOR;
+        RGB, FABRICATOR, TANK;
         public static final GuiIds[] VALID_TYPES = values();
         public final int id = ordinal();
     }

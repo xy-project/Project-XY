@@ -1,13 +1,13 @@
 package com.projextxy.core
 
 import codechicken.lib.packet.PacketCustom
-import com.projextxy.core.client.render.block.{RenderConnectedTexture, RenderCustomGlow, RenderSimpleGlow}
+import com.projextxy.core.client.render.block._
 import com.projextxy.core.client.render.item.{RenderXyCustomItemBlock, XychoriumlItemRenderer}
-import com.projextxy.core.client.{AnimationFX, CTRegistry, RenderTickHandler}
+import com.projextxy.core.client.{AnimationFX, BlockIconRegistry, CTRegistry, RenderTickHandler}
 import com.projextxy.core.generator.WorldGeneratorManager
 import com.projextxy.core.tile.{TileColorizer, TileXyCustomColor}
 import com.projextxy.util.Registry
-import cpw.mods.fml.client.registry.RenderingRegistry
+import cpw.mods.fml.client.registry.{ClientRegistry, RenderingRegistry}
 import cpw.mods.fml.common.FMLCommonHandler
 import cpw.mods.fml.common.event.{FMLInitializationEvent, FMLPostInitializationEvent, FMLPreInitializationEvent}
 import cpw.mods.fml.common.registry.GameRegistry
@@ -33,7 +33,8 @@ class CommonProxy {
   }
 
   def postInit(event: FMLPostInitializationEvent): Unit = {
-    Registry.file.close()
+    if (Registry.file != null)
+      Registry.file.close()
 
     val freq: Double = math.Pi * 2 / rainbowColors.length
     for (j <- rainbowColors.indices) {
@@ -52,7 +53,11 @@ class ClientProxy extends CommonProxy {
   @SideOnly(Side.CLIENT)
   override def preInit(event: FMLPreInitializationEvent): Unit = {
     super.preInit(event)
-
+    BlockIconRegistry.add("frame", "frame")
+    BlockIconRegistry.add("frame1", "frame1")
+    BlockIconRegistry.add("frame2", "frame2")
+    BlockIconRegistry.add("frame3", "frame3")
+    BlockIconRegistry.add("colorizerTop", "colorizerTop")
     MinecraftForge.EVENT_BUS.register(RenderTickHandler)
   }
 
@@ -64,10 +69,11 @@ class ClientProxy extends CommonProxy {
     RenderingRegistry.registerBlockHandler(new RenderSimpleGlow)
     RenderingRegistry.registerBlockHandler(new RenderCustomGlow)
     RenderingRegistry.registerBlockHandler(new RenderConnectedTexture)
-
+    RenderingRegistry.registerBlockHandler(new BlockFrameRenderer)
+    ClientRegistry.bindTileEntitySpecialRenderer(classOf[TileColorizer], new ColorizerTESR)
     MinecraftForgeClient.registerItemRenderer(CoreItems.itemXychorium, new XychoriumlItemRenderer)
     MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.blockXyCustom), new RenderXyCustomItemBlock)
-    MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.blockXyColorizer), new RenderXyCustomItemBlock)
+    //MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(CoreBlocks.blockXyColorizer), new RenderXyCustomItemBlock)
     PacketCustom.assignHandler(ProjectXYCore.MOD_ID, ProjectXyCPH)
 
   }

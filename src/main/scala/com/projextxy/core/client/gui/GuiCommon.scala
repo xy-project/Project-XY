@@ -6,7 +6,7 @@ import codechicken.lib.colour.ColourRGBA
 import codechicken.lib.render.{CCRenderState, RenderUtils}
 import codechicken.lib.vec.Vector3
 import com.projextxy.core.ProjectXYCoreProxy
-import com.projextxy.core.blocks.glow.BlockXyGlow
+import com.projextxy.core.blocks.glow.TBlockXyGlow
 import com.projextxy.core.reference.MCColors
 import com.projextxy.core.resource.{ResourceAction, ResourceLib}
 import net.minecraft.client.gui.inventory.GuiContainer
@@ -17,7 +17,7 @@ import org.lwjgl.opengl.GL11
 import scala.collection.JavaConverters._
 import scala.collection.mutable.ArrayBuffer
 
-abstract case class GuiCommon(container: Container) extends GuiContainer(container) {
+abstract class GuiCommon(container: Container) extends GuiContainer(container) {
   private val menus = new ArrayBuffer[Menu]()
 
   override def initGui(): Unit = {
@@ -50,7 +50,7 @@ abstract case class GuiCommon(container: Container) extends GuiContainer(contain
       new Vector3(x + 2, 8 + y, this.zLevel),
       new Vector3(x + 2 + width, 8 + y, this.zLevel),
       new Vector3(x + 2 + width, 2 + y, this.zLevel),
-      BlockXyGlow.animationIcon, 16.0D)
+      TBlockXyGlow.animationIcon, 16.0D)
     CCRenderState.draw()
     GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F)
   }

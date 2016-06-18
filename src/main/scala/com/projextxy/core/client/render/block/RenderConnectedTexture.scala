@@ -3,6 +3,7 @@ package com.projextxy.core.client.render.block
 import com.projextxy.core.client.render.block.RenderConnectedTexture._
 import com.projextxy.core.client.render.connected.ConnectedRenderBlocks
 import cpw.mods.fml.client.registry.{ISimpleBlockRenderingHandler, RenderingRegistry}
+import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.block.Block
 import net.minecraft.client.renderer.{EntityRenderer, RenderBlocks, Tessellator}
 import net.minecraft.world.IBlockAccess
@@ -85,6 +86,7 @@ class RenderConnectedTexture extends ISimpleBlockRenderingHandler {
 }
 
 object RenderConnectedTexture {
-  val renderType = RenderingRegistry.getNextAvailableRenderId
-  val connectedRenderer = new ConnectedRenderBlocks
+  val renderType: Int = RenderingRegistry.getNextAvailableRenderId
+
+  lazy val connectedRenderer = new ConnectedRenderBlocks
 }

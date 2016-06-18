@@ -5,7 +5,7 @@ import codechicken.lib.packet.PacketCustom
 import com.projextxy.mech.tile.TileFabricator
 import cpw.mods.fml.relauncher.{Side, SideOnly}
 import net.minecraft.entity.player.{EntityPlayer, InventoryPlayer}
-import net.minecraft.inventory.Slot
+import net.minecraft.inventory.{InventoryCrafting, Slot}
 import net.minecraft.item.ItemStack
 
 class ContainerFabricator(inventoryPlayer: InventoryPlayer, tile: TileFabricator) extends ContainerExtended {
@@ -31,6 +31,7 @@ class ContainerFabricator(inventoryPlayer: InventoryPlayer, tile: TileFabricator
   bindPlayerInventory(inventoryPlayer, 8, 104)
 
   val REDSTONE_SIGNAL_CHANGE = 1
+  val CRAFTING_SLOTS_CHANGED = 2
 
   override def doMergeStackAreas(slotIndex: Int, stack: ItemStack): Boolean = {
     if (slotIndex < 19) return mergeItemStack(stack, 19, 55, true)
@@ -47,11 +48,23 @@ class ContainerFabricator(inventoryPlayer: InventoryPlayer, tile: TileFabricator
     packet.sendToServer()
   }
 
+  def changeCraftingRecipe(stacks: Array[ItemStack]): Unit = {
+    val packet = getPacket(2)
+    packet.writeInt(CRAFTING_SLOTS_CHANGED)
+    for (i <- stacks.indices) {
+      packet.writeItemStack(stacks(i))
+    }
+    packet.sendToServer()
+  }
+
   override def handleServerPacket(packet: PacketCustom): Unit = {
     packet.readInt match {
       case REDSTONE_SIGNAL_CHANGE =>
         tile.mode = packet.readInt
         tile.getWorldObj.markBlockForUpdate(tile.xCoord, tile.yCoord, tile.zCoord)
+      case CRAFTING_SLOTS_CHANGED =>
+        for (i <- 0 until 9)
+          tile.setInventorySlotContents(i, packet.readItemStack())
       case _ =>
     }
   }

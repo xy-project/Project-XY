@@ -2,14 +2,16 @@ package com.projextxy.mech.block
 
 import codechicken.lib.colour.ColourRGBA
 import com.projextxy.core.ProjectXYCore
-import com.projextxy.core.blocks.glow.BlockXyGlow
+import com.projextxy.core.blocks.BlockXy
+import com.projextxy.core.blocks.glow.TBlockXyGlow
 import com.projextxy.core.blocks.traits.MachineBlock
+import com.projextxy.core.client.render.block.RenderSimpleGlow
 import com.projextxy.core.handler.GuiHandler
-import com.projextxy.core.reference.MCColors
 import com.projextxy.mech.block.BlockFabricator._
+import com.projextxy.mech.multiblock.MultiBlockManager
 import com.projextxy.mech.tile.TileFabricator
-import net.minecraft.block.ITileEntityProvider
 import net.minecraft.block.material.Material
+import net.minecraft.block.{Block, ITileEntityProvider}
 import net.minecraft.client.renderer.texture.IIconRegister
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.tileentity.TileEntity
@@ -17,9 +19,8 @@ import net.minecraft.util.IIcon
 import net.minecraft.world.{IBlockAccess, World}
 import net.minecraftforge.common.util.ForgeDirection
 
-class BlockFabricator extends BlockXyGlow(Material.rock) with ITileEntityProvider with MachineBlock {
+class BlockFabricator extends BlockXy(Material.rock) with TBlockXyGlow with ITileEntityProvider with MachineBlock {
   setBlockName("blockFabricator")
-  colors = List(MCColors.BLUE)
   setHardness(1.0F)
 
   val icons = Array.fill[IIcon](2)(null)
@@ -27,6 +28,9 @@ class BlockFabricator extends BlockXyGlow(Material.rock) with ITileEntityProvide
   override def createNewTileEntity(world: World, meta: Int): TileEntity = new TileFabricator
 
   override def onBlockActivated(world: World, x: Int, y: Int, z: Int, player: EntityPlayer, par6: Int, par7: Float, par8: Float, par9: Float): Boolean = {
+    for (direction <- ForgeDirection.VALID_DIRECTIONS) {
+      MultiBlockManager.convertBlockToShadow(world, x + direction.offsetX, y + direction.offsetY, z + direction.offsetZ)
+    }
     if (!player.isSneaking && world.getTileEntity(x, y, z).isInstanceOf[TileFabricator]) {
       player.openGui(ProjectXYCore, GuiHandler.GuiIds.FABRICATOR.id, world, x, y, z)
     }
@@ -56,8 +60,19 @@ class BlockFabricator extends BlockXyGlow(Material.rock) with ITileEntityProvide
       case _ => 220
     }
   }
+
+  override def breakBlock(world: World, x: Int, y: Int, z: Int, block: Block, par6: Int): Unit = {
+    world.getTileEntity(x, y, z).asInstanceOf[TileFabricator].dropItems()
+    super.breakBlock(world, x, y, z, block, par6)
+  }
+
+  override def customDrops: Boolean = false
+
+  override val hasColorMultiplier: Boolean = false
+
+  override def getColor(iB4lockAccess: IBlockAccess, x: Int, y: Int, z: Int): Int = color
 }
 
 object BlockFabricator {
-  val color = new ColourRGBA(0, 100, 255, 255).rgb()
+  lazy val color = new ColourRGBA(0, 100, 255, 255).rgb()
 }

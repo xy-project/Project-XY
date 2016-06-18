@@ -2,6 +2,7 @@ package com.projextxy.mech.tile
 
 import codechicken.lib.data.{MCDataInput, MCDataOutput}
 import codechicken.lib.inventory.{InventoryRange, InventoryUtils}
+import codechicken.lib.vec.Vector3
 import com.projextxy.core.tile.traits.TMachineTile
 import net.minecraft.entity.player.EntityPlayer
 import net.minecraft.inventory.{Container, ISidedInventory, InventoryCrafting}
@@ -55,6 +56,13 @@ class TileFabricator extends TMachineTile with ISidedInventory {
       case 0 => !powered
       case 1 => powered
       case 2 => powered && !prevPowered
+    }
+  }
+
+  def dropItems(): Unit = {
+    for (i <- 10 until INVENTORY_SIZE) {
+      if (inv(i) != null)
+        InventoryUtils.dropItem(inv(i), worldObj, Vector3.fromTileEntityCenter(this))
     }
   }
 

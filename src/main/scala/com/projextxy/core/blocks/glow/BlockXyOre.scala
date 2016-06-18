@@ -26,4 +26,6 @@ class BlockXyOre extends BlockXyGlow(Material.rock) {
     list.add(new ItemStack(CoreItems.itemXychorium, count, metadata))
     list
   }
+
+  override val hasColorMultiplier: Boolean = false
 }

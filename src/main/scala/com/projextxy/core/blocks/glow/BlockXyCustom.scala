@@ -4,9 +4,9 @@ import java.util
 
 import com.projextxy.core.blocks.BlockXy
 import com.projextxy.core.blocks.glow.BlockXyCustom.buildColoredStack
-import com.projextxy.core.blocks.traits.{ColorMultiplier, MachineBlock}
+import com.projextxy.core.blocks.traits.{MachineBlock, TColorBlock}
 import com.projextxy.core.client.render.block.RenderCustomGlow
-import com.projextxy.core.tile.TileXyCustomColor
+import com.projextxy.core.tile.{TileColorizer, TileXyCustomColor}
 import com.projextxy.core.{ProjectXYCore, ProjectXYCoreProxy}
 import net.minecraft.block.material.Material
 import net.minecraft.creativetab.CreativeTabs
@@ -19,7 +19,7 @@ import net.minecraft.util.{IIcon, MovingObjectPosition}
 import net.minecraft.world.{IBlockAccess, World}
 
 
-class BlockXyCustom(blocks: List[BlockXyGlow]) extends BlockXy(Material.rock) with MachineBlock {
+class BlockXyCustom(blocks: List[BlockXyGlow]) extends BlockXy(Material.rock) with MachineBlock with TBlockXyGlow {
   setBlockName("blockXyCustom")
   setHardness(0.5F)
   setCreativeTab(ProjectXYCore.tabCustomColored)
@@ -44,9 +44,9 @@ class BlockXyCustom(blocks: List[BlockXyGlow]) extends BlockXy(Material.rock) wi
 
   override def colorMultiplier(world: IBlockAccess, x: Int, y: Int, z: Int): Int = {
     blocks(world.getBlockMetadata(x, y, z)) match {
-      case block: ColorMultiplier =>
+      case block: TColorBlock =>
         world.getTileEntity(x, y, z) match {
-          case custom: TileXyCustomColor => custom.color
+          case custom: TileXyCustomColor => if (block.hasColorMultiplier) custom.color else super.colorMultiplier(world, x, y, z)
           case _ => super.colorMultiplier(world, x, y, z)
         }
       case _ => super.colorMultiplier(world, x, y, z)
@@ -68,6 +68,20 @@ class BlockXyCustom(blocks: List[BlockXyGlow]) extends BlockXy(Material.rock) wi
   }
 
   override def damageDropped(meta: Int): Int = meta
+
+  override def customDrops: Boolean = false
+
+  override val hasColorMultiplier: Boolean = false
+
+  override def getColor(world: IBlockAccess, x: Int, y: Int, z: Int): Int = {
+    world.getTileEntity(x, y, z) match {
+      case tile: TileColorizer => tile.getColor
+      case _ =>
+    }
+    0
+  }
+
+  override def getColor(meta: Int): Int = 0xFFF
 }
 
 object BlockXyCustom {

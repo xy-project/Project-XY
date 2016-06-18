@@ -1,8 +1,8 @@
 package com.projextxy.core
 
+import com.projextxy.core.blocks._
 import com.projextxy.core.blocks.glow._
-import com.projextxy.core.blocks.item.{ItemBLockColorContainer, ItemBlockColor, ItemBlockMetaHandler}
-import com.projextxy.core.blocks.{BlockXyColored, BlockXyDecor, BlockXyStone}
+import com.projextxy.core.blocks.item.{ItemBlockColorContainer, ItemBlockMetaHandler}
 import com.projextxy.core.client.CTRegistry
 import com.projextxy.util.Registry._
 import net.minecraft.block.Block
@@ -35,7 +35,7 @@ object CoreBlocks {
   def init(): Unit = {
     blockXyStone = new BlockXyStone
     blockXyOre = new BlockXyOre()
-    blockXyStorage = BlockXyGlowConnected("blockXyStorage", CTRegistry.XY_STORAGE_FOLDER, Material.rock, None, colorMultiplier = false, renderBlockIcon = false)
+    blockXyStorage = BlockXyGlowConnected("blockXyStorage", CTRegistry.XY_STORAGE_FOLDER, Material.rock, colorMultiplier = false, renderBlockIcon = false)
     blockXychoriumBrick = new BlockXyColored()
     blockXychoriumBrick.setBlockName("blockXychoriumBrick")
     blockXychoriumBrickFancy = new BlockXyColored()
@@ -67,18 +67,18 @@ object CoreBlocks {
   }
 
   private def initBricks(): Unit = {
-    blockXyBrick = BlockXyGlow("blockXyBrick", colorMultiplier = true)
-    blockXyBrickInverted = BlockXyGlow("blockXyBrickInverted")
-    blockXyBrickInvertedWhite = BlockXyGlow("blockXyBrickInvertedWhite")
-    blockXyBrickFancy = BlockXyGlow("blockXyBrickFancy", colorMultiplier = true)
-    blockXyBrickFancyInverted = BlockXyGlow("blockXyBrickFancyInverted")
-    blockXyBrickFancyInvertedWhite = BlockXyGlow("blockXyBrickFancyInvertedWhite")
+    blockXyBrick = BlockXyGlow(name = "blockXyBrick", colorMultiplier = true)
+    blockXyBrickInverted = BlockXyGlow(name = "blockXyBrickInverted")
+    blockXyBrickInvertedWhite = BlockXyGlow(name = "blockXyBrickInvertedWhite")
+    blockXyBrickFancy = BlockXyGlow(name = "blockXyBrickFancy", colorMultiplier = true)
+    blockXyBrickFancyInverted = BlockXyGlow(name = "blockXyBrickFancyInverted")
+    blockXyBrickFancyInvertedWhite = BlockXyGlow(name = "blockXyBrickFancyInvertedWhite")
   }
 
 
   private def initMachineBlocks(): Unit = {
-    blockXyMachineBlock = BlockXyGlowConnected("blockXyMachineBlock", CTRegistry.CLEAN_CONNECTED_FOLDER, Material.rock, None, colorMultiplier = false, renderBlockIcon = true)
-    blockXyMachineBlockWhite = BlockXyGlowConnected("blockXyMachineBlockWhite", CTRegistry.CLEAN_CONNECTED_FOLDER, Material.rock, None, colorMultiplier = false, renderBlockIcon = true)
+    blockXyMachineBlock = BlockXyGlowConnected("blockXyMachineBlock", CTRegistry.CLEAN_CONNECTED_FOLDER, Material.rock, colorMultiplier = false, renderBlockIcon = true)
+    blockXyMachineBlockWhite = BlockXyGlowConnected("blockXyMachineBlockWhite", CTRegistry.CLEAN_CONNECTED_FOLDER, Material.rock, colorMultiplier = false, renderBlockIcon = true)
   }
 
   private def registerAllBlocks(): Unit = {
@@ -106,8 +106,8 @@ object CoreBlocks {
     registerBlock(blockXyMachineBlockWhite, classOf[ItemBlockMetaHandler])
 
     //Custom variants
-    registerBlock(blockXyCustom, classOf[ItemBLockColorContainer])
-    registerBlock(blockXyColorizer, classOf[ItemBLockColorContainer])
+    registerBlock(blockXyCustom, classOf[ItemBlockColorContainer])
+    registerBlock(blockXyColorizer, classOf[ItemBlockColorContainer])
   }
 
 

@@ -3,7 +3,7 @@ package com.projextxy.core.blocks
 import java.util
 
 import com.projextxy.core.ProjectXYCore
-import com.projextxy.core.blocks.traits.ColorMultiplier
+import com.projextxy.core.blocks.traits.TColorBlock
 import com.projextxy.core.reference.{MCColors, ModColors}
 import net.minecraft.block.material.Material
 import net.minecraft.client.renderer.texture.IIconRegister
@@ -11,7 +11,7 @@ import net.minecraft.creativetab.CreativeTabs
 import net.minecraft.item.{Item, ItemStack}
 import net.minecraft.world.IBlockAccess
 
-class BlockXyColored extends BlockXy(Material.rock) with ColorMultiplier {
+class BlockXyColored extends BlockXy(Material.rock) with TColorBlock {
   setHardness(1.0F)
 
   var colors: List[MCColors] = ModColors.xyColors
@@ -29,4 +29,8 @@ class BlockXyColored extends BlockXy(Material.rock) with ColorMultiplier {
   }
 
   override def damageDropped(meta: Int): Int = meta
+
+  override val hasColorMultiplier: Boolean = true
+
+  override def getRenderColor(meta: Int): Int = colors(meta).rgb
 }

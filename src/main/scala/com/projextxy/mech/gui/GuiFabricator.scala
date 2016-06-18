@@ -5,8 +5,8 @@ import com.projextxy.mech.tile.TileFabricator
 import net.minecraft.entity.player.InventoryPlayer
 import net.minecraft.init.{Blocks, Items}
 
-class GuiFabricator(inventory: InventoryPlayer, tile: TileFabricator) extends GuiCommon(new ContainerFabricator(inventory, tile)) {
-  val redstone_control = addMenu(new Menu(this, 0, 9)
+case class GuiFabricator(inventory: InventoryPlayer, tile: TileFabricator) extends GuiCommon(new ContainerFabricator(inventory, tile)) {
+  val redstone_control = addMenu(new Menu(this, 0, 24)
     .addMenuItem("Auto: Low", Blocks.unlit_redstone_torch, 0)
     .addMenuItem("Auto: High", Blocks.redstone_torch, 0)
     .addMenuItem("Pulse", Items.redstone, 0))
@@ -21,5 +21,5 @@ class GuiFabricator(inventory: InventoryPlayer, tile: TileFabricator) extends Gu
     redstone_control.draw()
   }
 
-  def onRedstoneControlSelected(selected: Int): Unit = container.asInstanceOf[ContainerFabricator].handleGuiChange(selected)
+  def onRedstoneControlSelected(selected: Int): Unit = inventorySlots.asInstanceOf[ContainerFabricator].handleGuiChange(selected)
 }
